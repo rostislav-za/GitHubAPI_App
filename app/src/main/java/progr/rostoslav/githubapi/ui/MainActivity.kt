@@ -1,4 +1,4 @@
-package progr.rostoslav.githubapi
+package progr.rostoslav.githubapi.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import progr.rostoslav.githubapi.R
 
 class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/infoFragment"
-        android:name="progr.rostoslav.githubapi.InfoFragment"
+        android:name="progr.rostoslav.githubapi.ui.fragments.InfoFragment"
         android:label="@string/menu_label_fragment_info"
         tools:layout="@layout/fragment_info" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/repListFragment"
-        android:name="progr.rostoslav.githubapi.RepListFragment"
+        android:name="progr.rostoslav.githubapi.ui.fragments.RepListFragment"
         android:label="@string/menu_label_fragment_list"
         tools:layout="@layout/fragment_rep_list" >
         <action
@@ -31,16 +31,16 @@
     </fragment>
     <fragment
         android:id="@+id/savedRepListFragment"
-        android:name="progr.rostoslav.githubapi.SavedRepListFragment"
+        android:name="progr.rostoslav.githubapi.ui.fragments.SavedRepListFragment"
         android:label="@string/menu_label_fragment_saved_list"
-        tools:layout="@layout/fragment_saved_rep_list" >
+        tools:layout="@layout/fragment_rep_list" >
         <action
             android:id="@+id/action_savedRepListFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="progr.rostoslav.githubapi.DetailFragment"
+        android:name="progr.rostoslav.githubapi.ui.fragments.DetailFragment"
         android:label="@string/menu_label_fragment_detail"
         tools:layout="@layout/fragment_detail" />
 </navigation>
