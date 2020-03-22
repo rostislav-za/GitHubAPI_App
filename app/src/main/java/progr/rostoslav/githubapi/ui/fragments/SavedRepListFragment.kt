@@ -10,14 +10,7 @@ import progr.rostoslav.githubapi.R
 /**
  * A simple [Fragment] subclass.
  */
-class SavedRepListFragment : Fragment() {
+class SavedRepListFragment : BaseRepListFragment(){
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rep_list, container, false)
-    }
 
 }

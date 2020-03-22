@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="size_item_helper_icon">24dp</dimen>
+    <dimen name="spase_16">16dp</dimen>
+
+
 
 
     <!--Material elevation-->

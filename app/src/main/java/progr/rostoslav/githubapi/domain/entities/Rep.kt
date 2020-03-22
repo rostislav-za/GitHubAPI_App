@@ -1,5 +1,7 @@
 package progr.rostoslav.githubapi.domain.entities
 
+import progr.rostoslav.githubapi.R
+
 data class Rep(
     val title: String,
     val description: String,
@@ -10,6 +12,8 @@ data class Rep(
     var isFauv: Boolean = false,
     var author: String = ""
 ) {
+    val isFavRec = if (isFauv) R.drawable.saved
+    else R.drawable.unsaved
     fun toRepInfo(): RepInfo {
         return RepInfo(
             title = this.title,
@@ -22,4 +26,5 @@ data class Rep(
             full_name = this.author
         )
     }
+
 }
