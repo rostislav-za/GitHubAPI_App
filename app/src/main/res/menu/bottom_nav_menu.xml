@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/savedRepListFragment"
+        android:title="@string/menu_label_fragment_saved_list"
+        />
+    <item
+        android:id="@+id/repListFragment"
+        android:title="@string/menu_label_fragment_list"
+        />
+    <item
+        android:id="@+id/detailFragment"
+        android:title="@string/menu_label_fragment_detail"
+        />
+    <item
+        android:id="@+id/infoFragment"
+        android:title="@string/menu_label_fragment_info"
+        />
+
+</menu>

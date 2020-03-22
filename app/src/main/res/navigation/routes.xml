@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/routes"
+    app:startDestination="@id/infoFragment">
+
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="progr.rostoslav.githubapi.InfoFragment"
+        android:label="@string/menu_label_fragment_info"
+        tools:layout="@layout/fragment_info" >
+        <action
+            android:id="@+id/action_infoFragment_to_repListFragment"
+            app:destination="@id/repListFragment" />
+        <action
+            android:id="@+id/action_infoFragment_to_savedRepListFragment"
+            app:destination="@id/savedRepListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/repListFragment"
+        android:name="progr.rostoslav.githubapi.RepListFragment"
+        android:label="@string/menu_label_fragment_list"
+        tools:layout="@layout/fragment_rep_list" >
+        <action
+            android:id="@+id/action_repListFragment_to_savedRepListFragment"
+            app:destination="@id/savedRepListFragment" />
+        <action
+            android:id="@+id/action_repListFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedRepListFragment"
+        android:name="progr.rostoslav.githubapi.SavedRepListFragment"
+        android:label="@string/menu_label_fragment_saved_list"
+        tools:layout="@layout/fragment_saved_rep_list" >
+        <action
+            android:id="@+id/action_savedRepListFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="progr.rostoslav.githubapi.DetailFragment"
+        android:label="@string/menu_label_fragment_detail"
+        tools:layout="@layout/fragment_detail" />
+</navigation>
