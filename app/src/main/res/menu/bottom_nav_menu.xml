@@ -2,18 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/savedRepListFragment"
+        android:icon="@drawable/saved"
         android:title="@string/menu_label_fragment_saved_list"
         />
     <item
         android:id="@+id/repListFragment"
+        android:icon="@drawable/list_unordered"
         android:title="@string/menu_label_fragment_list"
         />
     <item
         android:id="@+id/detailFragment"
+        android:icon="@drawable/repo"
         android:title="@string/menu_label_fragment_detail"
         />
     <item
         android:id="@+id/infoFragment"
+        android:icon="@drawable/info"
         android:title="@string/menu_label_fragment_info"
         />
 

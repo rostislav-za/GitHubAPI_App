@@ -2,11 +2,12 @@ package progr.rostoslav.githubapi.data
 
 import progr.rostoslav.githubapi.DataManager
 import progr.rostoslav.githubapi.data.local.FakeData
+import progr.rostoslav.githubapi.data.network.Net
 import progr.rostoslav.githubapi.domain.entities.Rep
 
 class DataRepository {
     val hd = FakeData()
-    // val net = Net()
+   val net = Net()
 
     fun getCommits(count: Int = 10) {
         var r = hd.getCommits(count)
@@ -14,23 +15,21 @@ class DataRepository {
     }
 
     fun getReps(author: String) {
-//        println("GET REQUEST REP LIST")
-//        net.getRepsFromServer(author)
-//        loadRepsFromDB()
+       net.getRepsFromServer(author)
 
-        val list = ArrayList<Rep>()
-        list.addAll(hd.getRepositoryes(10))
-        DataManager.udateReps(list)
+//        loadRepsFromDB()
+//        val list = ArrayList<Rep>()
+//        list.addAll(hd.getRepositoryes(10))
+//        DataManager.udateReps(list)
     }
 
     fun getRepInfo(rep: Rep) {
-//        net.getRepFromServer(rep.author, rep.title)
+        net.getRepFromServer(rep.author, rep.title)
 
     }
 
     fun getRepInfo(author: String, title: String) {
-        /*  println("GET REQUEST REP INFO")
-        net.getRepFromServer(author, title)*/
+        net.getRepFromServer(author, title)
     }
 }
     /*fun saveRepsToDB(new_reps: ArrayList<RealmRep>) {

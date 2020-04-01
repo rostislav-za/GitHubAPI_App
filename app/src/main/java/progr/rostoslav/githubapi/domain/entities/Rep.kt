@@ -9,11 +9,12 @@ data class Rep(
     val forks_count: Int,
     val stars_count: Int,
     val commits_count: Int,
-    var isFauv: Boolean = false,
+    var isSaved: Boolean = false,
     var author: String = ""
 ) {
-    val isFavRec = if (isFauv) R.drawable.saved
+    val isSavedRes = if (isSaved) R.drawable.saved
     else R.drawable.unsaved
+
     fun toRepInfo(): RepInfo {
         return RepInfo(
             title = this.title,
@@ -21,10 +22,22 @@ data class Rep(
             stars_count = this.stars_count,
             commits_count = this.commits_count,
             forks_count = this.forks_count,
-            isFav = this.isFauv,
+            isSaved = this.isSaved,
             description = this.description,
             full_name = this.author
         )
+    }
+    fun toRepRealm(): RepRealm {
+        var r = RepRealm()
+        r.title=this.title
+        r.description=this.description
+        r.lang=this.lang
+        r.forks_count=this.forks_count
+        r.stars_count=this.stars_count
+        r.commits_count=this.commits_count
+        r.author=this.author
+        r.isSaved=this.isSaved
+        return r
     }
 
 }

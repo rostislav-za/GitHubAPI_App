@@ -27,7 +27,7 @@ class FakeData {
                 forks_count = i * (i % 2) + 2 * i + 7,
                 stars_count = i * (i % 4) + i,
                 commits_count = i * (i % 2) + i,
-                isFauv = i % 3 == 0
+                isSaved = i % 3 == 0
             ))
 
         return r

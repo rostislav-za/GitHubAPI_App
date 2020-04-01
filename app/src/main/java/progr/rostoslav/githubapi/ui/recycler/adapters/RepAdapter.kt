@@ -7,13 +7,13 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.easyreader3.presentation.adapters.base.BaseAdapter
-import com.example.easyreader3.presentation.adapters.base.BaseAdapterCallback
-import com.example.easyreader3.presentation.adapters.base.BaseViewHolder
 import kotlinx.android.synthetic.main.item_rep.*
 import progr.rostoslav.githubapi.R
 import progr.rostoslav.githubapi.domain.entities.Rep
 import progr.rostoslav.githubapi.ui.recycler.ItemTouchViewHolder
+import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapter
+import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapterCallback
+import progr.rostoslav.githubapi.ui.recycler.bases.BaseViewHolder
 
 class RepAdapter() : BaseAdapter<Rep>() {
 
@@ -41,7 +41,7 @@ class RepAdapter() : BaseAdapter<Rep>() {
                     .into(this)
             }
 
-            ir_iv_fav.setImageResource(model.isFavRec)
+            ir_iv_fav.setImageResource(model.isSavedRes)
             ir_iv_fav.setOnClickListener { callback?.onSavedClick(model, itemView) }
         }
 

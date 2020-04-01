@@ -7,7 +7,7 @@ data class RepInfo(
     val stars_count: Int=0,
     val commits_count: Int=0,
     val forks_count: Int=0,
-    var isFav: Boolean = false,
+    var isSaved: Boolean = false,
     val full_name: String = "",
     val login: String = "",
     val node_id: String = "",

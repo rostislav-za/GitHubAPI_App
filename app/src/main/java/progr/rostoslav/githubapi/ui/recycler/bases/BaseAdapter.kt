@@ -1,4 +1,4 @@
-package com.example.easyreader3.presentation.adapters.base
+package progr.rostoslav.githubapi.ui.recycler.bases
 
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
