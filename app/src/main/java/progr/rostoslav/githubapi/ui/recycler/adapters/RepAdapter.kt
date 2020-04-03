@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_rep.*
 import progr.rostoslav.githubapi.R
-import progr.rostoslav.githubapi.domain.entities.Rep
+import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.ui.recycler.ItemTouchViewHolder
 import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapter
 import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapterCallback

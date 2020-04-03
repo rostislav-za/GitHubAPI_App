@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import progr.rostoslav.githubapi.R
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class InfoFragment : Fragment() {
 
     override fun onCreateView(

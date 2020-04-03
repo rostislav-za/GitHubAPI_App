@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_commit.*
 import progr.rostoslav.githubapi.R
 
-import progr.rostoslav.githubapi.domain.entities.Commit
+import progr.rostoslav.githubapi.entities.Commit
 import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapter
 import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapterCallback
 import progr.rostoslav.githubapi.ui.recycler.bases.BaseViewHolder

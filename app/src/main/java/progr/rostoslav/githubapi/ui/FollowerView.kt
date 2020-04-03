@@ -1,4 +1,4 @@
-package progr.rostoslav.githubapi
+package progr.rostoslav.githubapi.ui
 
 interface FollowerView {
 

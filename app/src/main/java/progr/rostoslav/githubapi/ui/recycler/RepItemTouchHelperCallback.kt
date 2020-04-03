@@ -10,7 +10,7 @@ import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import progr.rostoslav.githubapi.R
-import progr.rostoslav.githubapi.domain.entities.Rep
+import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.ui.recycler.adapters.RepAdapter
 
 class RepItemTouchHelperCallback(

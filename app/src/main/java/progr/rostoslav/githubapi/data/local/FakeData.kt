@@ -1,7 +1,7 @@
 package progr.rostoslav.githubapi.data.local
 
-import progr.rostoslav.githubapi.domain.entities.Commit
-import progr.rostoslav.githubapi.domain.entities.Rep
+import progr.rostoslav.githubapi.entities.Commit
+import progr.rostoslav.githubapi.entities.Rep
 
 
 class FakeData {

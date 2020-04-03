@@ -7,27 +7,30 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import progr.rostoslav.githubapi.DataManager
-import progr.rostoslav.githubapi.FollowerView
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import progr.rostoslav.githubapi.R
 import progr.rostoslav.githubapi.data.DataRepository
+import progr.rostoslav.githubapi.domain.AppModel
+import progr.rostoslav.githubapi.entities.Rep
 
-class MainActivity : AppCompatActivity(), FollowerView {
+class MainActivity : AppCompatActivity(), ActivityView, ActionProvider {
     lateinit var navController: NavController
-
-
+    val app_model = AppModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        toFollowView(this)
         initNavigation()
-        initData()
+        initRealm()
+        app_model.onCreate()
     }
+
     override fun onStop() {
-        toUnfollowView(this)
         super.onStop()
+        app_model.onDestroy()
     }
+
     private fun initNavigation() {
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.navFragment) as NavHostFragment? ?: return
@@ -35,21 +38,23 @@ class MainActivity : AppCompatActivity(), FollowerView {
         val bottomBar = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomBar?.setupWithNavController(navController)
     }
-
-    private  fun initData(){
-        val dr= DataRepository()
-        dr.getReps("octokit")
-        dr.getRepInfo("rostislav-za", "GitHubAPI")
-        dr.getCommits(10)
-//        dr.initData(MainActivity.this)
+    private fun initRealm() {
+        Realm.init(this)
+        val config = RealmConfiguration.Builder()
+            .deleteRealmIfMigrationNeeded()
+            .build()
+        Realm.setDefaultConfiguration(config)
+    }
+    override fun refreshData() {
+        app_model.updateData()
     }
 
+    override fun repIsSavedChanged(rep: Rep) {
+        app_model.repIsSavedChanged(rep)
+    }
 
-
-
-
-    override fun updateView() {
-        Toast.makeText(this, "update",Toast.LENGTH_SHORT).show()
+    override fun repItemClicked(rep: Rep) {
+        app_model.repItemClicked(rep)
     }
 
 

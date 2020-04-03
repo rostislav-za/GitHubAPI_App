@@ -1,9 +1,8 @@
-package progr.rostoslav.githubapi
+package progr.rostoslav.githubapi.ui
 
-import progr.rostoslav.githubapi.domain.entities.Commit
-import progr.rostoslav.githubapi.domain.entities.Rep
-import progr.rostoslav.githubapi.domain.entities.RepInfo
-
+import progr.rostoslav.githubapi.entities.Commit
+import progr.rostoslav.githubapi.entities.Rep
+import progr.rostoslav.githubapi.entities.RepInfo
 
 class DataManager {
     companion object {
@@ -24,13 +23,16 @@ class DataManager {
             for (i in followersViews) i.updateView()
         }
 
-        fun getRepInfo() = rep_info
-        fun getReps() = rep_list
+        fun getRepInfo() =
+            rep_info
+        fun getReps() =
+            rep_list
         fun getFauvReps() = rep_list.filter { it.isSaved } as ArrayList<Rep>
 
 
         fun udateRepInfo(new: RepInfo) {
             rep_info = new
+            updateFollowersViews()
         }
 
         fun udateReps(new_reps: ArrayList<Rep>) {

@@ -3,11 +3,10 @@ package progr.rostoslav.githubapi.data.network
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
-import progr.rostoslav.githubapi.DataManager
-import progr.rostoslav.githubapi.data.DataRepository
-import progr.rostoslav.githubapi.domain.entities.RepInfo
-import progr.rostoslav.githubapi.domain.entities.RepRealm
-import progr.rostoslav.githubapi.domain.entities.toRepList
+import progr.rostoslav.githubapi.ui.DataManager
+import progr.rostoslav.githubapi.entities.RepInfo
+import progr.rostoslav.githubapi.entities.RepRealm
+import progr.rostoslav.githubapi.entities.toRepList
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -53,7 +52,7 @@ class Net() {
     fun getRepFromServer(author: String, rep_name: String) =
         getApi().getRep(author, rep_name).enqueue(callbackRepos)
 
-    fun getRepsFromServer(author: String) =
+    fun getRepsFromServer(author: String="octocat") =
         getApi().getReps(author).enqueue(callbackList)
 
 //    fun getRepFromServer(author: String, rep_name: String) =

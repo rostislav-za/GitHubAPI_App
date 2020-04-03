@@ -1,4 +1,4 @@
-package progr.rostoslav.githubapi.domain.entities
+package progr.rostoslav.githubapi.entities
 
 
 data class RepInfo(

@@ -4,22 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_rep_item"
+    android:background="@color/color_background_grey_light"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="1dp">
+        android:elevation="@dimen/elevation_top_app_bar">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
             android:id="@+id/imageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ir_tv_title"
             app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
@@ -46,6 +50,7 @@
             android:id="@+id/ir_tv_lang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
             android:textColor="@color/color_text_grey"
@@ -54,8 +59,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ir_iv_fav"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/ir_tv_title"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/ir_tv_title"
+            app:layout_constraintVertical_bias="1.0"
             tools:text="(Kotlin)" />
 
         <ImageView
@@ -75,10 +81,6 @@
             app:srcCompat="@drawable/unsaved" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_background_grey" />
 
     <TextView
         android:id="@+id/ir_tv_descr"
@@ -89,16 +91,11 @@
         android:paddingTop="8dp"
         android:paddingRight="16dp"
         android:paddingBottom="8dp"
-        android:layout_margin="1dp"
         tools:text="Multiline description" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_background_grey" />
 
     <LinearLayout
-        android:layout_margin="1dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_background_white"
