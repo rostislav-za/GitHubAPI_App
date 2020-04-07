@@ -2,15 +2,14 @@ package progr.rostoslav.githubapi.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import progr.rostoslav.githubapi.Action
 import progr.rostoslav.githubapi.R
-import progr.rostoslav.githubapi.data.DataRepository
 import progr.rostoslav.githubapi.domain.AppModel
 import progr.rostoslav.githubapi.entities.Rep
 
@@ -46,15 +45,15 @@ class MainActivity : AppCompatActivity(), ActivityView, ActionProvider {
         Realm.setDefaultConfiguration(config)
     }
     override fun refreshData() {
-        app_model.updateData()
+    app_model.reduce(Action.UIRefreshedListAction())
     }
 
     override fun repIsSavedChanged(rep: Rep) {
-        app_model.repIsSavedChanged(rep)
+        app_model.reduce(Action.UIRepSavedChangedAction(rep))
     }
 
     override fun repItemClicked(rep: Rep) {
-        app_model.repItemClicked(rep)
+        app_model.reduce(Action.UIRepClickedAction(rep))
     }
 
 

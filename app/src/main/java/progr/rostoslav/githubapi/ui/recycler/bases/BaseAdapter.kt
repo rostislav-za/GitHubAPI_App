@@ -17,7 +17,7 @@ abstract class BaseAdapter<P> : RecyclerView.Adapter<BaseViewHolder<P>>() {
     }
 
     fun getList(): List<P> {
-        var r = ArrayList<P>()
+        val r = ArrayList<P>()
         r.addAll(items)
         return r
     }
@@ -42,11 +42,13 @@ abstract class BaseAdapter<P> : RecyclerView.Adapter<BaseViewHolder<P>>() {
     }
 
     fun deleteItem(item: P) {
+        if(items.contains(item)){
         val position = items.indexOf(item)
-        deleteItem(position)
+        deleteItem(position)}
     }
 
-    fun deleteItem(position: Int) {
+   private fun deleteItem(position: Int) {
+
         items.removeAt(position)
         notifyItemRemoved(position)
     }

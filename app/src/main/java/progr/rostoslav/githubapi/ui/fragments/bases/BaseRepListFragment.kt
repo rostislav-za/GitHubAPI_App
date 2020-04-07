@@ -50,7 +50,6 @@ abstract class BaseRepListFragment : BaseFragment() {
     open fun setListeners() {
         adapter.attachCallback(object : BaseAdapterCallback<Rep> {
             override fun onItemClick(model: Rep, view: View) {
-//                onItemClicked(model, view)
                 (activity as ActionProvider).repItemClicked(model)
                 val extras = FragmentNavigatorExtras(imageView to model.title)
                 findNavController().navigate(
@@ -59,14 +58,8 @@ abstract class BaseRepListFragment : BaseFragment() {
             }
 
             override fun onSavedClick(model: Rep, view: View) {
-//                onItemSavedClicked(model)
                 (activity as ActionProvider).repIsSavedChanged(model)
-                adapter.updateItem(model, model.copy(isSaved = !model.isSaved))
-/*        TODO прикрутить diffutils, уточнить, почему выдает ошибку.
-       val ind = MainActivity.rep_list.indexOf(model)
-        MainActivity.rep_list[ind] = copy
-        adapter.updateData( MainActivity.rep_list)*/
-
+                updateItem(model)
             }
         })
         val touchCallback = RepItemTouchHelperCallback(adapter) {
@@ -88,4 +81,10 @@ abstract class BaseRepListFragment : BaseFragment() {
         (activity as ActivityView).refreshData()
         Toast.makeText(activity, "update", Toast.LENGTH_SHORT).show()
     }
+    open fun updateItem(item:Rep){
+        val list =adapter.getList()
+        val last_r=list.findLast { (it.title==item.title)&&(it.author==item.author) }
+        if(last_r!=null)adapter.updateItem(last_r,item.copy(isSaved = !item.isSaved))
+    }
+
 }

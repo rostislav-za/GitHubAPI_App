@@ -1,7 +1,7 @@
 package progr.rostoslav.githubapi.entities
 
 fun Rep.toRepRealm(): RepRealm {
-    var r = RepRealm()
+    val r = RepRealm()
     r.title = this.title
     r.description = this.description
     r.lang = this.lang
@@ -34,7 +34,7 @@ fun List<RepRealm>.toRepList(): ArrayList<Rep> {
     return r
 }
 
-fun ArrayList<Rep>.toRealmList(): ArrayList<RepRealm> {
+fun List<Rep>.toRealmList(): List<RepRealm> {
     var r = ArrayList<RepRealm>()
     for (i in this) {
         r.add(i.toRepRealm())

@@ -73,7 +73,7 @@ class RepItemTouchHelperCallback(
     private fun drawIcon(canvas: Canvas, itemView: View, dX: Float) {
         val icon = itemView.resources.getDrawable(R.drawable.saved, itemView.context.theme)
         val iconSize = itemView.resources.getDimensionPixelSize(R.dimen.size_item_helper_icon)
-        val space = itemView.resources.getDimensionPixelSize(R.dimen.spase_16)
+        val space = itemView.resources.getDimensionPixelSize(R.dimen.space_16)
         val margin = (itemView.bottom - itemView.top - iconSize) / 2
         with(iconBounds) {
             left = itemView.right - iconSize - space

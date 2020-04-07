@@ -9,7 +9,7 @@ import progr.rostoslav.githubapi.ui.DataManager
 
 class Local() {
 
-    fun saveReps(reps: ArrayList<Rep>) {
+    fun saveReps(reps: List<Rep>) {
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
         realm.deleteAll()

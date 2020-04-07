@@ -27,7 +27,7 @@ class DataManager {
             rep_info
         fun getReps() =
             rep_list
-        fun getFauvReps() = rep_list.filter { it.isSaved } as ArrayList<Rep>
+        fun getSavedReps() = rep_list.filter { it.isSaved } as ArrayList<Rep>
 
 
         fun udateRepInfo(new: RepInfo) {
@@ -36,6 +36,13 @@ class DataManager {
         }
 
         fun udateReps(new_reps: ArrayList<Rep>) {
+            /* val list_in_db = local.getReps()
+        val r = ArrayList<Rep>()
+        for (i in list_in_db) {
+            val rep = list.findLast { (i.author == it.author) && (i.title == it.title) }
+            if (rep != null) r.add(rep.copy(isSaved = i.isSaved)) else r.add(i)
+        }
+        for (i in list) if (!r.contains(i)) r.add(i)*/
 //            val realm= Realm.getDefaultInstance()
 //            realm.beginTransaction()
 //            realm.copyToRealm(new_reps.toRealmList())

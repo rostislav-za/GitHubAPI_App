@@ -2,8 +2,8 @@
 <resources>
 
     <dimen name="size_item_helper_icon">24dp</dimen>
-    <dimen name="spase_16">16dp</dimen>
-
+    <dimen name="space_16">16dp</dimen>
+    <dimen name="space_8">8dp</dimen>
 
 
 
@@ -29,4 +29,5 @@
     <dimen name="elevation_standard_1">0dp</dimen>
     <dimen name="elevation_standard_4">4dp</dimen>
     <dimen name="elevation_standard_16">16dp</dimen>
+
 </resources>
