@@ -11,6 +11,7 @@ data class Rep(
     val commits_count: Int,
     var isSaved: Boolean = false,
     var author: String = ""
+//    ,var user_key:String
 ) {
     val isSavedRes = if (isSaved) R.drawable.saved
     else R.drawable.unsaved

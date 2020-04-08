@@ -58,7 +58,7 @@ class RepAdapter() : BaseAdapter<Rep>() {
     }
 
 
-    fun updateData(data: ArrayList<Rep>) {
+   /* fun updateData(data: ArrayList<Rep>) {
         val diffCallback = object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
                 (items[oldItemPosition].title == data[newItemPosition].title) &&
@@ -79,6 +79,6 @@ class RepAdapter() : BaseAdapter<Rep>() {
     interface RepSelectedListener {
         fun onRepSelected(rep: Rep, imageView: ImageView)
     }
-
+*/
 
 }

@@ -16,7 +16,6 @@ import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.R
 import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.ui.ActionProvider
-import progr.rostoslav.githubapi.ui.ActivityView
 import progr.rostoslav.githubapi.ui.recycler.RepItemTouchHelperCallback
 import progr.rostoslav.githubapi.ui.recycler.adapters.RepAdapter
 import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapterCallback
@@ -30,7 +29,6 @@ abstract class BaseRepListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_rep_list, container, false)
 
-
     override fun init() {
         setListeners()
         initRecyclerView()
@@ -38,7 +36,6 @@ abstract class BaseRepListFragment : BaseFragment() {
         srl.setOnRefreshListener { refreshSwyped() }
         srl.isRefreshing = true
     }
-
 
     open fun initRecyclerView() {
         val divider = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
@@ -68,7 +65,6 @@ abstract class BaseRepListFragment : BaseFragment() {
         }
         val touchHelper = ItemTouchHelper(touchCallback)
         touchHelper.attachToRecyclerView(rv)
-
     }
 
     override fun setContent() {
@@ -78,13 +74,12 @@ abstract class BaseRepListFragment : BaseFragment() {
     }
 
     open fun refreshSwyped() {
-        (activity as ActivityView).refreshData()
-        Toast.makeText(activity, "update", Toast.LENGTH_SHORT).show()
-    }
-    open fun updateItem(item:Rep){
-        val list =adapter.getList()
-        val last_r=list.findLast { (it.title==item.title)&&(it.author==item.author) }
-        if(last_r!=null)adapter.updateItem(last_r,item.copy(isSaved = !item.isSaved))
+        (activity as ActionProvider).refreshData()
     }
 
+    open fun updateItem(item: Rep) {
+        val list = adapter.getList()
+        val last_r = list.findLast { (it.title == item.title) && (it.author == item.author) }
+        if (last_r != null) adapter.updateItem(last_r, item.copy(isSaved = !item.isSaved))
+    }
 }

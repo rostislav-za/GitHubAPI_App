@@ -1,6 +1,9 @@
 package progr.rostoslav.githubapi.ui.fragments
 
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,15 +19,25 @@ import progr.rostoslav.githubapi.ui.fragments.bases.BaseRepListFragment
 import progr.rostoslav.githubapi.ui.recycler.RepItemTouchHelperCallback
 import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapterCallback
 
-class SavedRepListFragment : BaseRepListFragment(){
+class SavedRepListFragment : BaseRepListFragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = inflater.inflate(R.layout.fragment_rep_saved_list, container, false)
 
     override fun init() {
         adapter.attachCallback(object : BaseAdapterCallback<Rep> {
-            override fun onItemClick(model: Rep, view: View){
+            override fun onItemClick(model: Rep, view: View) {
                 (activity as ActionProvider).repItemClicked(model)
                 val extras = FragmentNavigatorExtras(imageView to model.title)
-                findNavController().navigate(R.id.action_savedRepListFragment_to_detailFragment,null,null,extras)
+                findNavController().navigate(
+                    R.id.action_savedRepListFragment_to_detailFragment,
+                    null,
+                    null,
+                    extras
+                )
             }
+
             override fun onSavedClick(model: Rep, view: View) {
                 (activity as ActionProvider).repIsSavedChanged(model)
                 updateItem(model)
@@ -45,17 +58,17 @@ class SavedRepListFragment : BaseRepListFragment(){
     }
 
     override fun updateItem(item: Rep) {
-        val list =adapter.getList()
-        val last_r=list.findLast { (it.title==item.title)&&(it.author==item.author) }
-        if(last_r!=null)adapter.deleteItem(last_r)
+        val list = adapter.getList()
+        val last_r = list.findLast { (it.title == item.title) && (it.author == item.author) }
+        if (last_r != null) adapter.deleteItem(last_r)
     }
 
     override fun setContent() {
-            srl.isRefreshing = false
-            list= DataManager.getSavedReps()
-            adapter.setList(list)
-        }
+        srl.isRefreshing = false
+        list = DataManager.getSavedReps()
+        adapter.setList(list)
     }
+}
 
 
 
