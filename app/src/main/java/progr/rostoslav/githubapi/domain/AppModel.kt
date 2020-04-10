@@ -55,7 +55,6 @@ class AppModel() {
             is Action.RepInfoLoadedAction -> DataManager.udateRepInfo(a.rep_info)
             is Action.RepsLoadedAction -> {
                 DataManager.udateReps(mergeListFromNet(DataManager.getReps(), a.new_reps))
-             //  dr.getRepItems(DataManager.getReps())
             }
             is Action.CommitsLoadedAction -> {
                 DataManager.updateCommits(a.new_commits)
@@ -87,7 +86,6 @@ class AppModel() {
         r.addAll(new_list)
         return r
     }
-
     fun saveData() = dr.saveReps(DataManager.getSavedReps())
 
 

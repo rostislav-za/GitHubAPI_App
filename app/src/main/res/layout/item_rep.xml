@@ -46,6 +46,7 @@
             android:id="@+id/ir_iv_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:foregroundTint="@color/gh_color_black"
             android:paddingLeft="@dimen/space_16"
             android:paddingTop="@dimen/space_16"
             android:paddingRight="@dimen/space_16"
@@ -94,6 +95,7 @@
                 android:layout_weight="1"
                 android:drawableStart="@drawable/history"
                 android:drawablePadding="@dimen/space_8"
+                android:foregroundTint="@color/gh_color_black"
                 android:gravity="start|center_vertical"
                 android:paddingStart="@dimen/space_16"
                 android:paddingTop="@dimen/space_8"
@@ -104,7 +106,8 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/color_background_grey" />
+                android:background="@color/color_background_grey"
+                android:foregroundTint="@color/gh_color_black" />
 
             <TextView
                 android:id="@+id/ir_tv_stars"
@@ -113,6 +116,7 @@
                 android:layout_weight="1"
                 android:drawableStart="@drawable/star"
                 android:drawablePadding="@dimen/space_8"
+                android:foregroundTint="@color/gh_color_black"
                 android:gravity="start|center_vertical"
                 android:padding="@dimen/space_8"
                 android:paddingStart="@dimen/space_16"
@@ -131,6 +135,7 @@
                 android:layout_weight="1"
                 android:drawableStart="@drawable/repo_forked"
                 android:drawablePadding="@dimen/space_8"
+                android:foregroundTint="@color/gh_color_black"
                 android:gravity="start|center_vertical"
                 android:padding="@dimen/space_8"
                 android:paddingStart="@dimen/space_16"
@@ -145,6 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="octokit/"
+            android:textColor="@color/gh_color_black"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"

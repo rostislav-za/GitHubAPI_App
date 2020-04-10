@@ -23,6 +23,5 @@ abstract class BaseFragment : Fragment(), FollowerView{
 
     override fun updateView() {
         setContent()
-        Toast.makeText(activity,"updated", Toast.LENGTH_SHORT).show()
     }
 }

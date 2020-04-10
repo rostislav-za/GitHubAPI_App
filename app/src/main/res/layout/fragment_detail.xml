@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_background_grey_light"
+    android:orientation="vertical"
     tools:context=".ui.fragments.DetailFragment">
 
     <TextView
@@ -15,12 +15,13 @@
         android:layout_weight="1"
         android:gravity="start"
         android:text="Name of Repos"
+        android:textColor="@color/color_accent"
         android:textSize="18sp"
         android:textStyle="bold"
         android:transitionName="repo_title"
         app:layout_collapseMode="parallax"
         app:layout_constraintBottom_toBottomOf="@+id/fr_tv_author_name"
-        app:layout_constraintEnd_toStartOf="@+id/fr_iv_fav"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fr_tv_author_name"
         app:layout_constraintTop_toTopOf="@+id/fr_tv_author_name" />
 
@@ -30,21 +31,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|center_vertical"
         android:layout_weight="1"
-        android:padding="24dp"
         android:src="@drawable/saved"
+        android:translationX="4dp"
+        android:translationY="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/fr_iv_author"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/fr_iv_author"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fr_iv_author" />
+        app:layout_constraintStart_toStartOf="@+id/fr_iv_author"
+        app:layout_constraintTop_toTopOf="@+id/fr_iv_author"
+        app:layout_constraintVertical_bias="1.0" />
 
 
     <ImageView
         android:id="@+id/fr_iv_author"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:transitionName="imageView"
@@ -64,6 +67,7 @@
         android:layout_gravity="bottom|start"
         android:layout_marginStart="8dp"
         android:text="Martin/"
+        android:textColor="@color/gh_color_black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/fr_iv_author"
@@ -91,6 +95,7 @@
         layout="@layout/include_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="24dp"
         android:layout_weight="18"
         android:paddingStart="24dp"
         android:paddingRight="24dp"

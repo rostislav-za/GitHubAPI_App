@@ -69,7 +69,9 @@ abstract class BaseActivity : AppCompatActivity(), ActionProvider, FollowerView 
             .findFragmentById(nav_fragment) as NavHostFragment? ?: return
         navController = host.navController
         val bottomBar = findViewById<BottomNavigationView>(nav_view)
+
         bottomBar?.setupWithNavController(navController)
+
     }
 
     open fun setContent() {}

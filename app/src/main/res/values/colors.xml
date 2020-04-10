@@ -1,64 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_primary">@color/gh_color_smoke</color>
-    <color name="color_primaryDark">@color/gh_color_grey</color>
-    <color name="color_accent">@color/gh_color_blue_0</color>
+    <color name="color_primaryDark">@color/gh_color_grey_2</color>
+    <color name="color_accent">@color/gh_color_blue</color>
 
     <color name="color_white">@color/gh_color_white</color>
 
     <!--App Colors-->
     <color name="color_background_grey">@color/gh_color_grey_4</color>
-    <color name="color_background_grey_dark">@color/gh_color_grey</color>
+    <color name="color_background_grey_dark">@color/gh_color_grey_2</color>
     <color name="color_background_grey_light">@color/gh_color_grey_5</color>
     <color name="color_background_white">@color/gh_color_white</color>
-    <color name="color_background_green">@color/gh_color_green</color>
-
-
-    <color name="color_border_grey">@color/gh_color_grey_4</color>
-    <color name="color_border_green">@color/gh_color_green_light</color>
-
-    <color name="color_gradient_start">@color/gh_color_blue_3</color>
-    <color name="color_gradient_finish">@color/gh_color_white</color>
-
-
+    <color name="color_border_grey">@color/color_primaryDark</color>
 
     <!--Text Colors-->
-    <color name="color_text">@color/gh_color_grey_4</color>
-    <color name="color_text_green">@color/gh_color_green</color>
-    <color name="color_text_blue">@color/gh_color_blue_0</color>
-    <color name="color_text_grey">@color/gh_color_grey</color>
-
+    <color name="color_text">@color/gh_color_grey_2</color>
+    <color name="color_text_not_active">@color/gh_color_grey_4</color>
+    <color name="color_text_blue">@color/gh_color_blue</color>
+    <color name="color_text_grey">@color/gh_color_grey_2</color>
 
     <!--GitHub Colors-->
-    <color name="gh_color_blue">#4078C0</color>
-    <color name="gh_color_green">#6cc644</color>
-    <color name="gh_color_green_light">#7cd654</color>
-
-
-    <color name="gh_color_red">#bd2c00</color>
-    <color name="gh_color_orange">#c9510c</color>
-    <color name="gh_color_purple">#6e5494</color>
     <color name="gh_color_white">#FFFFFF</color>
     <color name="gh_color_smoke_light">#fafafa</color>
     <color name="gh_color_smoke">#f5f5f5</color>
-    <color name="gh_color_grey">#303030</color>
 
-
-    <color name="gh_color_blue_5">#F1F8FF</color>
-    <color name="gh_color_blue_3">#DBECFF</color>
-    <color name="gh_color_blue_2">#A0CDFF</color>
     <color name="gh_color_blue_1">#00ADD8</color>
-    <color name="gh_color_blue_0">#0366D6</color>
-
-    <color name="gh_color_orange_1">#FFC7A5</color>
-    <color name="gh_color_orange_0">#E36209</color>
+    <color name="gh_color_blue">#0366D6</color>
 
     <color name="gh_color_purple_1">#FFEEF8</color>
     <color name="gh_color_purple_0">#EA4AAA</color>
+    <color name="gh_color_purple__">#85318D</color>
+    <color name="gh_color_black">#242935</color>
 
     <color name="gh_color_grey_5">#F6F8FA</color>
     <color name="gh_color_grey_4">#D1D5DA</color>
-    <color name="gh_color_grey_3">#888E91</color>
     <color name="gh_color_grey_2">#6A7477</color>
 
 </resources>

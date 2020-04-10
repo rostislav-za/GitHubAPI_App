@@ -13,7 +13,6 @@ import progr.rostoslav.githubapi.entities.TaskInfo
 import progr.rostoslav.githubapi.ui.fragments.bases.BaseFragment
 import progr.rostoslav.githubapi.ui.recycler.adapters.TaskAdapter
 
-
 class InfoFragment : BaseFragment() {
     val adapter = TaskAdapter()
     val list = listOf<TaskInfo>(
