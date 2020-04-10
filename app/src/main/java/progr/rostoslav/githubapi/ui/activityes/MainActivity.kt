@@ -35,9 +35,8 @@ class MainActivity : BaseActivity() {
             editor.clear()
             editor.apply()
             app_model.logOut(it)
-            onDestroy()
+            finishAffinity()
             true
-
         }
         updateView()
     }
@@ -53,7 +52,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun updateView() {
-      println("updated username in toolbar ${DataManager.getUsername()}")
         getSupportActionBar()?.title=DataManager.getUsername()
     }
 
