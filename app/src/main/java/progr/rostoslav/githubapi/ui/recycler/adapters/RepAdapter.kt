@@ -29,18 +29,17 @@ class RepAdapter() : BaseAdapter<Rep>() {
         override fun bind(model: Rep) {
             ir_tv_title.text = model.title
             ir_tv_commits.text = "" + model.commits_count
-            ir_tv_descr.text = model.description
+            ir_tv_descr.text = "(${model.lang})${model.description}"
             ir_tv_forks.text = "" + model.forks_count
-            ir_tv_lang.text = "(${model.lang})"
+            ir_authorname.text = "${model.author}/"
             ir_tv_stars.text = "" + model.stars_count
             imageView.apply {
                 transitionName = model.title
                 Glide.with(context)
-                    .load("https://sun9-59.userapi.com/c857536/v857536300/e2f7d/NN5SjYymVew.jpg")
+                    .load(model.autor_img)
                     .apply(RequestOptions.circleCropTransform())
                     .into(this)
             }
-
             ir_iv_fav.setImageResource(model.isSavedRes)
             ir_iv_fav.setOnClickListener { callback?.onSavedClick(model, itemView) }
         }
@@ -73,8 +72,6 @@ class RepAdapter() : BaseAdapter<Rep>() {
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         items = data
         diffResult.dispatchUpdatesTo(this)
-
-
     }
     interface RepSelectedListener {
         fun onRepSelected(rep: Rep, imageView: ImageView)

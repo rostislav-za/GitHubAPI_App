@@ -15,7 +15,7 @@ import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapterCallback
 import progr.rostoslav.githubapi.ui.recycler.bases.BaseViewHolder
 
 
-class CommitAdapter(): BaseAdapter<Commit>() {
+class CommitAdapter() : BaseAdapter<Commit>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
@@ -23,20 +23,18 @@ class CommitAdapter(): BaseAdapter<Commit>() {
             callback
         )
 
-    class ViewHolder(currentView: View, val callback: BaseAdapterCallback<Commit>?) : BaseViewHolder<Commit>(currentView) {
+    class ViewHolder(currentView: View, val callback: BaseAdapterCallback<Commit>?) :
+        BaseViewHolder<Commit>(currentView) {
         override fun bind(model: Commit) {
-            ic_tv_commit.text= model.title
-            ic_tv_date.text="commited an ${model.date}"
-            ic_tv_author.text=model.author
+            ic_tv_commit.text = model.title
+            ic_tv_date.text = "commited an ${model.date.substring(0, 10)}"
+            ic_tv_author.text = model.author
             ic_iv_author_img.apply {
                 Glide.with(context)
                     .load(model.author_img)
                     .apply(RequestOptions.circleCropTransform())
                     .into(this)
             }
-            //Glide.with(imageView).load("https://sun9-28.userapi.com/4GMFmo1ULP3-EL7h42Qck-gqHOutuAsexp4R0Q/WUX0vDNR0RM.jpg").centerCrop().into(imageView)
-            //   Glide.with(fr_iv_author).load(repos_Info.avatar_url).into(fr_iv_author)
-
         }
     }
 

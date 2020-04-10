@@ -1,93 +1,40 @@
 package progr.rostoslav.githubapi.data.network
 
-import okhttp3.ResponseBody
-import org.json.JSONArray
-import org.json.JSONObject
-import progr.rostoslav.githubapi.Action
 import progr.rostoslav.githubapi.data.DataRepository
 import progr.rostoslav.githubapi.entities.Rep
-import progr.rostoslav.githubapi.entities.RepInfo
-
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import progr.rostoslav.githubapi.entities.User
 import retrofit2.Retrofit
 
-class Net(dr:DataRepository) {
+class Net(dr: DataRepository, user: User) {
+    val baseAuth="${user.email}:${user.password}@"
 
+  val baseUrl= "https://${baseAuth}api.github.com/"
+
+   val cb= Callbacks(dr)
     private fun getApi(): GitApi {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
+            .baseUrl(baseUrl)
             .build()
-
         val api: GitApi = retrofit.create(GitApi::class.java)
         return api
     }
 
-    private val callbackList: Callback<ResponseBody> = object : Callback<ResponseBody> {
-        override fun onFailure(call: Call<ResponseBody>, t: Throwable) = t.printStackTrace()
+    fun getGlobalRepsFromServer() =
+    getApi().getGlobalReps().enqueue(cb.globalReps)
 
-        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-            val responseText = response.body()?.string()
-//            if (responseText != null) DataManager.udateReps(parseRepsJSON(responseText))
-            if (responseText != null) dr.model.reduce(Action.RepsLoadedAction(parseRepsJSON(responseText)))
-        }
+    fun getGlobalRepsItemsFromServer(reps:List<Rep>){
+        for(i in reps) getApi().getRep(i.author,i.title).enqueue(cb.repItem)
     }
 
-    private val callbackRepos: Callback<ResponseBody> = object : Callback<ResponseBody> {
-        override fun onFailure(call: Call<ResponseBody>, t: Throwable) = t.printStackTrace()
-
-        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-            val responseText = response.body()?.string()
-//            if (responseText != null) DataManager.udateRepInfo(parseRepInfoJSON(responseText))
-            if (responseText != null) dr.model.reduce(Action.RepInfoLoadedAction(parseRepInfoJSON(responseText)))
-        }
-    }
 
     fun getRepFromServer(author: String, rep_name: String) =
-        getApi().getRep(author, rep_name).enqueue(callbackRepos)
+        getApi().getRep(author, rep_name).enqueue(cb.repInfo)
 
     fun getRepsFromServer(author: String = "octocat") =
-        getApi().getReps(author).enqueue(callbackList)
+        getApi().getUserReps(author).enqueue(cb.userReps)
 
-    private fun parseRepsJSON(responseText: String): ArrayList<Rep> {
-        val r = ArrayList<Rep>()
-        val jsonArray = JSONArray(responseText)
-        for (i in 0..jsonArray.length() - 1) {
-            val jsonObject = jsonArray.getJSONObject(i)
-            r.add(
-                Rep(
-                    title = jsonObject.getString("name"),
-                    author = jsonObject.getString("full_name").split("/")[0],
-                    description = jsonObject.getString("description"),
-                    lang = jsonObject.getString("language"),
-                    forks_count = jsonObject.getInt("forks"),
-                    stars_count = jsonObject.getInt("stargazers_count"),
-                    commits_count = jsonObject.getInt("open_issues_count") + 7//TODO FIX WRONG DATA
-                )
-            )
-        }
-        return r
-    }
+    fun getCommitsFromServer(author: String="rostislav-za",rep_name: String="GitHubAPI") =
+        getApi().getCommits(author,rep_name).enqueue(cb.commits)
 
-    private fun parseRepInfoJSON(responseText: String): RepInfo {
-        val jsonObject = JSONObject(responseText)
-        val jO_owner = JSONObject(jsonObject.getString("owner"))
 
-        val r = RepInfo(
-            title = jsonObject.getString("name"),
-            description = jsonObject.getString("description"),
-            lang = jsonObject.getString("language"),
-            forks_count = jsonObject.getInt("forks"),
-            stars_count = jsonObject.getInt("stargazers_count"),
-            commits_count = jsonObject.getInt("open_issues_count") + 7,//TODO FIX WRONG DATA
-            full_name = jsonObject.getString("full_name"),
-            login = jO_owner.getString("login"),
-            avatar_url = jO_owner.getString("avatar_url"),
-            created_at = jsonObject.getString("created_at"),
-            updated_at = jsonObject.getString("updated_at"),
-            size = jsonObject.getInt("size")
-        )
-        return r
-    }
 }

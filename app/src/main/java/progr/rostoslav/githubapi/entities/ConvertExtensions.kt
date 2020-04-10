@@ -10,7 +10,8 @@ fun Rep.toRepRealm(): RepRealm {
     r.commits_count = this.commits_count
     r.author = this.author
     r.isSaved = this.isSaved
-    r.user_key=this.user_key
+    r.user_key = this.user_key
+    r.author_img = this.autor_img
     return r
 }
 
@@ -23,24 +24,22 @@ fun RepRealm.toRep(): Rep {
         stars_count = this.stars_count,
         commits_count = this.commits_count,
         isSaved = this.isSaved,
-        user_key = this.user_key
+        user_key = this.user_key,
+        author = this.author,
+        autor_img = this.author_img
     )
     return r
 }
 
 fun List<RepRealm>.toRepList(): ArrayList<Rep> {
     var r = ArrayList<Rep>()
-    for (i in this) {
-        r.add(i.toRep())
-    }
+    for (i in this) r.add(i.toRep())
     return r
 }
 
 fun List<Rep>.toRealmList(): List<RepRealm> {
     var r = ArrayList<RepRealm>()
-    for (i in this) {
-        r.add(i.toRepRealm())
-    }
+    for (i in this) r.add(i.toRepRealm())
     return r
 }
 
@@ -54,6 +53,7 @@ fun Rep.toRepInfo(): RepInfo {
         forks_count = this.forks_count,
         isSaved = this.isSaved,
         description = this.description,
-        full_name = this.author
+        full_name = this.author,
+        avatar_url = this.autor_img
     )
 }

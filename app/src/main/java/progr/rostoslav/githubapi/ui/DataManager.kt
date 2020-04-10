@@ -25,12 +25,11 @@ class DataManager {
             for (i in followersViews) i.updateView()
         }
 
-        fun getUsername() = username + ""
-        fun getRepInfo() =
-            rep_info
 
-        fun getReps() =
-            rep_list
+        fun getUsername() = username + ""
+        fun getRepInfo() = rep_info
+
+        fun getReps() = rep_list
 
         fun getSavedReps() = rep_list.filter { it.isSaved } as ArrayList<Rep>
 
@@ -40,12 +39,11 @@ class DataManager {
         }
 
         fun udateRepInfo(new: RepInfo) {
-            rep_info = new
+            rep_info = new.copy(commits = rep_info.copy().commits)
             updateFollowersViews()
         }
 
         fun udateReps(new_reps: ArrayList<Rep>) {
-
             rep_list = new_reps
             updateFollowersViews()
         }
@@ -57,8 +55,7 @@ class DataManager {
 
         fun updateCommits(c: List<Commit>) {
             rep_info.commits = c
+            updateFollowersViews()
         }
-
-
     }
 }

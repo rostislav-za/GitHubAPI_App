@@ -1,5 +1,6 @@
 package progr.rostoslav.githubapi.entities
 
+import progr.rostoslav.githubapi.R
 
 data class RepInfo(
     val title: String="",
@@ -17,4 +18,7 @@ data class RepInfo(
     val size: Int = 0,
 
     var commits: List<Commit> = emptyList()
-)
+){
+    val isSavedRes = if (isSaved) R.drawable.saved
+    else R.drawable.unsaved
+}

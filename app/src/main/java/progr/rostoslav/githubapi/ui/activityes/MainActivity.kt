@@ -36,7 +36,6 @@ class MainActivity : BaseActivity() {
         return true
     }
 
-    override fun saveContet() {
-        app_model.onDestroy()
-    }
+    override fun saveContet() = app_model.onDestroy()
+
 }

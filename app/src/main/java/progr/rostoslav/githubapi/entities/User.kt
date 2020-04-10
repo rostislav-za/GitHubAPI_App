@@ -1,7 +1,8 @@
 package progr.rostoslav.githubapi.entities
 
-class User (
+class User(
     val email: String,
-    val password: String){
-   var key=email+password
+    val password: String
+) {
+    var key = email + password
 }

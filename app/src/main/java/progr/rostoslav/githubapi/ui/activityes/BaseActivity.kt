@@ -17,42 +17,44 @@ import progr.rostoslav.githubapi.domain.AppModel
 import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.ui.FollowerView
 
-abstract class BaseActivity:AppCompatActivity(),ActionProvider,FollowerView {
-lateinit var app_model:AppModel
+abstract class BaseActivity : AppCompatActivity(), ActionProvider, FollowerView {
+    lateinit var app_model: AppModel
     lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setContent()
     }
-    override fun startLoginActivity(){
+
+    override fun startLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
-    fun clearSharedPref(){
+
+    fun clearSharedPref() {
         val pref = getSharedPreferences(APP_USER, AppCompatActivity.MODE_PRIVATE)
         val editor = pref.edit()
         editor.clear()
         editor.apply()
     }
-    override fun refreshData() {
-        app_model.reduce(Action.UIRefreshedListAction())
-    }
 
-    override fun repIsSavedChanged(rep: Rep) {
-        app_model.reduce(Action.UIRepSavedChangedAction(rep))
-    }
+    override fun refreshData() = app_model.reduce(Action.UIRefreshedListAction())
 
-    override fun repItemClicked(rep: Rep) {
-        app_model.reduce(Action.UIRepClickedAction(rep))
-    }
+
+    override fun repIsSavedChanged(rep: Rep) = app_model.reduce(Action.UIRepSavedChangedAction(rep))
+
+
+    override fun repItemClicked(rep: Rep) = app_model.reduce(Action.UIRepClickedAction(rep))
+
     override fun onNewIntent(intent: Intent?) {
         setContent()
         super.onNewIntent(intent)
     }
+
     override fun onStop() {
         super.onStop()
-    saveContet()}
+        saveContet()
+    }
 
     open fun initRealm() {
         Realm.init(this)
@@ -61,6 +63,7 @@ lateinit var app_model:AppModel
             .build()
         Realm.setDefaultConfiguration(config)
     }
+
     open fun initNavigation(nav_fragment: Int, nav_view: Int) {
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(nav_fragment) as NavHostFragment? ?: return
@@ -69,6 +72,6 @@ lateinit var app_model:AppModel
         bottomBar?.setupWithNavController(navController)
     }
 
-    open  fun setContent(){}
-    open fun saveContet(){}
+    open fun setContent() {}
+    open fun saveContet() {}
 }

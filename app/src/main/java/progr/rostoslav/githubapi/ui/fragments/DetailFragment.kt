@@ -19,10 +19,9 @@ import progr.rostoslav.githubapi.ui.recycler.adapters.CommitAdapter
 
 
 class DetailFragment :BaseFragment() {
-    val commitAdapter =
-        CommitAdapter()
-    val list=ArrayList<Commit>()
-    var repos_Info: RepInfo = DataManager.getRepInfo()
+   val commitAdapter = CommitAdapter()
+   var list= listOf<Commit>()
+   var repos_Info: RepInfo = DataManager.getRepInfo()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,30 +31,32 @@ class DetailFragment :BaseFragment() {
 
     override fun init() {
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        updateView()
         rv.layoutManager = LinearLayoutManager(activity)
+        commitAdapter.setList(list)
         rv.adapter = commitAdapter
         super.init()
+        setContent()
     }
 
     override fun setContent() {
-        list.clear()
         repos_Info = DataManager.getRepInfo()
-        list.addAll(repos_Info.commits)
         fr_tv_rep_name.text= repos_Info.title
-        fr_tv_author_name.text= repos_Info.login
-        fr_lang.text= repos_Info.lang
-        fr_tv_info.text= repos_Info.toString()
-        //  fr_iv_author.transitionName = repos_Info.title
+        fr_tv_author_name.text= repos_Info.login+"/"
+        fr_iv_fav.setImageResource(repos_Info.isSavedRes)
+      repos_Info.lang
+        fr_tv_info.text="(${repos_Info.lang}) ${repos_Info.description}"
         fr_iv_author.apply {
             transitionName = repos_Info.title
             Glide.with(context)
-                .load("https://sun9-59.userapi.com/c857536/v857536300/e2f7d/NN5SjYymVew.jpg")
+                .load(repos_Info.avatar_url)
                 .apply(RequestOptions.circleCropTransform())
                 .into(this)
         }
+        list =repos_Info.commits
+        commitAdapter.setList(list)
         super.setContent()
     }
+
 
 }
 

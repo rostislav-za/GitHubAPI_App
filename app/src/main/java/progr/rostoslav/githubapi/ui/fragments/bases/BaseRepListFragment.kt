@@ -32,7 +32,6 @@ abstract class BaseRepListFragment : BaseFragment() {
     override fun init() {
         setListeners()
         initRecyclerView()
-
         srl.setOnRefreshListener { refreshSwyped() }
         srl.isRefreshing = true
     }
@@ -73,9 +72,8 @@ abstract class BaseRepListFragment : BaseFragment() {
         adapter.setList(list)
     }
 
-    open fun refreshSwyped() {
-        (activity as ActionProvider).refreshData()
-    }
+    open fun refreshSwyped() = (activity as ActionProvider).refreshData()
+
 
     open fun updateItem(item: Rep) {
         val list = adapter.getList()

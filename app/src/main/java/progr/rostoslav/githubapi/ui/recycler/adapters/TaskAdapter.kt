@@ -1,5 +1,6 @@
 package progr.rostoslav.githubapi.ui.recycler.adapters
 
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ class TaskAdapter(): BaseAdapter<TaskInfo>() {
         override fun bind(model:TaskInfo) {
             it_title.text= model.title
             it_text.text= model.text
+            if(model.text=="")it_text.isEnabled=false
             it_iv_checked.setImageResource( model.isReadyImg)
         }
     }

@@ -37,48 +37,34 @@ abstract class BaseAdapter<P> : RecyclerView.Adapter<BaseViewHolder<P>>() {
         notifyItemChanged(position)
     }
 
-    fun updateItem(oldItem: P, newItem: P) {
-        updateItem(items.lastIndexOf(oldItem), newItem)
-    }
+    fun updateItem(oldItem: P, newItem: P) = updateItem(items.lastIndexOf(oldItem), newItem)
 
     fun deleteItem(item: P) {
-        if(items.contains(item)){
-        val position = items.indexOf(item)
-        deleteItem(position)}
+        if (items.contains(item)) {
+            val position = items.indexOf(item)
+            deleteItem(position)
+        }
     }
 
-   private fun deleteItem(position: Int) {
-
+    private fun deleteItem(position: Int) {
         items.removeAt(position)
         notifyItemRemoved(position)
     }
 
-    fun attachCallback(callback: BaseAdapterCallback<P>) {
-        this.callback = callback
-    }
+    fun attachCallback(callback: BaseAdapterCallback<P>) { this.callback = callback }
 
-    fun detachCallback() {
-        this.callback = null
-    }
+    fun detachCallback() { this.callback = null }
 
     override fun getItemCount(): Int = items.count()
 
     override fun onBindViewHolder(holder: BaseViewHolder<P>, position: Int) {
         holder.bind(items[position])
-
         holder.itemView.setOnClickListener {
-            callback?.onItemClick(
-                items[position],
-                holder.itemView
-            )
+            callback?.onItemClick(items[position], holder.itemView)
         }
-
         holder.itemView.setOnLongClickListener {
-            if (callback == null) {
-                false
-            } else {
-                callback!!.onLongClick(items[position], holder.itemView)
-            }
+            if (callback == null) false
+            else callback!!.onLongClick(items[position], holder.itemView)
         }
     }
 }

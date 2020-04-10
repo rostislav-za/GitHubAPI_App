@@ -8,7 +8,7 @@ import retrofit2.http.Path
 
 interface GitApi {
     @GET("/users/{username}/repos")
-    fun getReps(
+    fun getUserReps(
         @Path("username") username: String="octokit"
     ): Call<ResponseBody>
 
@@ -18,5 +18,15 @@ interface GitApi {
         @Path("repo_name") repos_name: String="GitHubAPI"
     ): Call<ResponseBody>
 
-/*добавить запрос на комиты и добавить запрос на каждый репозиторий, добавить в запросы  базовую авторизацию*/
+    @GET("/repos/{username}/{repo_name}/commits")
+    fun getCommits(
+        @Path("username") username: String="rostislav-za",
+        @Path("repo_name") repos_name: String="GitHubAPI"
+    ): Call<ResponseBody>
+
+    @GET("/repositories")
+    fun getGlobalReps(
+    ): Call<ResponseBody>
+
+/*добавить запрос на комиты и добавить запрос на каждый репозиторий, добавить в запросы  базовую авторизацию изменить запрос на все репозитории*/
 }
