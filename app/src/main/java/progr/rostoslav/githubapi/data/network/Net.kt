@@ -83,21 +83,10 @@ class Net(dr:DataRepository) {
             commits_count = jsonObject.getInt("open_issues_count") + 7,//TODO FIX WRONG DATA
             full_name = jsonObject.getString("full_name"),
             login = jO_owner.getString("login"),
-            node_id = jO_owner.getString("node_id"),
             avatar_url = jO_owner.getString("avatar_url"),
-            url = jO_owner.getString("url"),
             created_at = jsonObject.getString("created_at"),
             updated_at = jsonObject.getString("updated_at"),
-            size = jsonObject.getInt("size"),
-            network_count = jsonObject.getInt("network_count"),
-            subscribers_count = jsonObject.getInt("subscribers_count"),
-            open_issues = jsonObject.getInt("open_issues"),
-            watchers = jsonObject.getInt("watchers"),
-            default_branch = jsonObject.getString("default_branch"),
-            has_issues = jsonObject.getBoolean("has_issues"),
-            has_projects = jsonObject.getBoolean("has_projects"),
-            has_downloads = jsonObject.getBoolean("has_downloads"),
-            has_wiki = jsonObject.getBoolean("has_wiki")
+            size = jsonObject.getInt("size")
         )
         return r
     }

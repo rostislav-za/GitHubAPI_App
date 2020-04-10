@@ -17,11 +17,6 @@ import progr.rostoslav.githubapi.ui.recycler.adapters.TaskAdapter
 class InfoFragment : BaseFragment() {
     val adapter = TaskAdapter()
     val list = listOf<TaskInfo>(
-
-        /*          TaskInfo(
-                      title=,
-                      text=
-                  ),*/
         TaskInfo(
             title="  1) Главный экран приложения - список репозиториев запрошенных по урлу https://api.github.com/repositories",
             text=" для получения дополнительной информации о репозитории нужно делать отдельный запрос для каждого репозитория на урл https://api.github.com/repos/<REPO_full_name> Каждый репозиторий должен содержать:\n" +
@@ -78,8 +73,19 @@ class InfoFragment : BaseFragment() {
         TaskInfo(
             title="9) Реализовать привязку избранного к логину пользователя",
             text="Каждый авторизованный пользователь должен видеть свои избранные репозитории. То есть избранное пользователя A должно не зависеть от избранного пользователя B"
+            , isReady = true ),
+                TaskInfo(
+                title="10*) Вынести строки в ресурсы",
+        text=""
+    ),
+        TaskInfo(
+            title="11*) Добавить шифрование к sharedPref",
+            text=""
+        ),
+        TaskInfo(
+            title="12*)реализовать ключ как логина, зашифрованный паролем ",
+            text=""
         )
-
     )
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

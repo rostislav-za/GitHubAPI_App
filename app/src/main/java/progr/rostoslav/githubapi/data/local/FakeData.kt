@@ -11,7 +11,7 @@ class FakeData {
         var r = ArrayList<Commit>()
         for (i in 0..count) r.add(
             Commit(
-                "HardCommit № $i"
+                "HardCommit № $i","https://avatars0.githubusercontent.com/u/17958266?v=4","Rstislav_hardIni","2019-01-25T03:43:57Z"
             )
         )
         return r

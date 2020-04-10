@@ -10,6 +10,7 @@ fun Rep.toRepRealm(): RepRealm {
     r.commits_count = this.commits_count
     r.author = this.author
     r.isSaved = this.isSaved
+    r.user_key=this.user_key
     return r
 }
 
@@ -21,7 +22,8 @@ fun RepRealm.toRep(): Rep {
         forks_count = this.forks_count,
         stars_count = this.stars_count,
         commits_count = this.commits_count,
-        isSaved = this.isSaved
+        isSaved = this.isSaved,
+        user_key = this.user_key
     )
     return r
 }

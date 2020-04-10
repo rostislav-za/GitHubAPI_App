@@ -54,8 +54,6 @@ class DetailFragment :BaseFragment() {
                 .apply(RequestOptions.circleCropTransform())
                 .into(this)
         }
-        //Glide.with(imageView).load("https://sun9-28.userapi.com/4GMFmo1ULP3-EL7h42Qck-gqHOutuAsexp4R0Q/WUX0vDNR0RM.jpg").centerCrop().into(imageView)
-        //   Glide.with(fr_iv_author).load(repos_Info.avatar_url).into(fr_iv_author)
         super.setContent()
     }
 

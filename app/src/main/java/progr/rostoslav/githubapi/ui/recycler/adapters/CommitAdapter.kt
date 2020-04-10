@@ -3,7 +3,10 @@ package progr.rostoslav.githubapi.ui.recycler.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_commit.*
+import kotlinx.android.synthetic.main.item_rep.*
 import progr.rostoslav.githubapi.R
 
 import progr.rostoslav.githubapi.entities.Commit
@@ -23,6 +26,17 @@ class CommitAdapter(): BaseAdapter<Commit>() {
     class ViewHolder(currentView: View, val callback: BaseAdapterCallback<Commit>?) : BaseViewHolder<Commit>(currentView) {
         override fun bind(model: Commit) {
             ic_tv_commit.text= model.title
+            ic_tv_date.text="commited an ${model.date}"
+            ic_tv_author.text=model.author
+            ic_iv_author_img.apply {
+                Glide.with(context)
+                    .load(model.author_img)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(this)
+            }
+            //Glide.with(imageView).load("https://sun9-28.userapi.com/4GMFmo1ULP3-EL7h42Qck-gqHOutuAsexp4R0Q/WUX0vDNR0RM.jpg").centerCrop().into(imageView)
+            //   Glide.with(fr_iv_author).load(repos_Info.avatar_url).into(fr_iv_author)
+
         }
     }
 

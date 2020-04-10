@@ -18,6 +18,5 @@ interface GitApi {
         @Path("repo_name") repos_name: String="GitHubAPI"
     ): Call<ResponseBody>
 
-//    @GET("/repositories")
-//    fun getGlobalRepsList(): Call<ResponseBody>
+/*добавить запрос на комиты и добавить запрос на каждый репозиторий, добавить в запросы  базовую авторизацию*/
 }

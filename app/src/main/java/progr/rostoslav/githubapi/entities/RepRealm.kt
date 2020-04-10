@@ -12,4 +12,5 @@ open class RepRealm : RealmObject(){
     var commits_count: Int=0
     var isSaved: Boolean = false
     var author: String = ""
+    var user_key: String =""
 }

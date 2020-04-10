@@ -24,11 +24,10 @@ class AppModel() {
     lateinit var activity: AppCompatActivity
 
     fun onCreate(email: String, pass: String,_activity: AppCompatActivity) {
-        println("MODEL CREATE $email $pass  ")
         activity = _activity
         user=User(email,pass)
-       DataManager.updateUsername(email)
-        dr.init()
+       DataManager.updateUsername(user.email)
+        dr.init(user.key)
 
         DataManager.udateReps(dr.getLoadedReps())
 
@@ -62,13 +61,13 @@ class AppModel() {
         }
     }
 
-    fun logOut(it: MenuItem): Boolean {
+    fun logOut(it: MenuItem) {
         onDestroy()
         (activity as ActionProvider).startLoginActivity()
-        return true
     }
 
     fun mergeListFromNet(old_list: ArrayList<Rep>, new_list: ArrayList<Rep>): ArrayList<Rep> {
+        for(i in new_list)i.user_key=user.key
         val r = ArrayList<Rep>()
         for (i in old_list.filter { it.isSaved }) {
             val rep =

@@ -16,7 +16,7 @@
         android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/imageView5"
+        app:layout_constraintBottom_toTopOf="@+id/ic_iv_author_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,38 +24,38 @@
         tools:text="Some text in commit description" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/ic_tv_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_iv_author_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/ic_iv_author_img"
+        app:layout_constraintTop_toTopOf="@+id/ic_iv_author_img"
         app:layout_constraintVertical_bias="1.0"
         tools:text="Rostislav_za" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/ic_tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_tv_author"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/ic_tv_author"
+        app:layout_constraintTop_toTopOf="@+id/ic_tv_author"
         app:layout_constraintVertical_bias="1.0"
         tools:text="committed on 10.04.2020" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/ic_iv_author_img"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="16dp"

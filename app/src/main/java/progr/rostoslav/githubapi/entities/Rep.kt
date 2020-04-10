@@ -12,8 +12,8 @@ data class Rep(
     var isSaved: Boolean = false,
     var author: String = ""
     /*, var autor_img: String = "",
-    var list: List<Commit>? = null,
-    var user_key: String*/
+    var list: List<Commit>? = null*/,
+    var user_key: String=""
 ) {
     val isSavedRes = if (isSaved) R.drawable.saved
     else R.drawable.unsaved
