@@ -1,2 +1,0 @@
-package progr.rostoslav.githubapi.ui.login
-const val SALT ="Rd1s4G55g4ZE8gdg45f25X48jk9DH3hFJ3J6fhDFfNjfUJNfd544XjZDpDFwddNG2JxbHj"

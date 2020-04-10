@@ -9,21 +9,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_rep_list.*
 import kotlinx.android.synthetic.main.include_recycler.*
 import kotlinx.android.synthetic.main.item_rep.*
 import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.R
 import progr.rostoslav.githubapi.entities.Rep
-import progr.rostoslav.githubapi.ui.ActionProvider
+import progr.rostoslav.githubapi.ui.activityes.ActionProvider
 import progr.rostoslav.githubapi.ui.fragments.bases.BaseRepListFragment
 import progr.rostoslav.githubapi.ui.recycler.RepItemTouchHelperCallback
 import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapterCallback
 
 class SavedRepListFragment : BaseRepListFragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_rep_saved_list, container, false)
 
     override fun init() {
         adapter.attachCallback(object : BaseAdapterCallback<Rep> {

@@ -1,7 +1,7 @@
 package progr.rostoslav.githubapi.data
 
-import progr.rostoslav.githubapi.data.local.FakeData
-import progr.rostoslav.githubapi.data.local.Local
+import androidx.appcompat.app.AppCompatActivity
+import progr.rostoslav.githubapi.data.local.*
 import progr.rostoslav.githubapi.data.network.Net
 import progr.rostoslav.githubapi.domain.AppModel
 import progr.rostoslav.githubapi.entities.Rep
@@ -40,4 +40,5 @@ class DataRepository(val model: AppModel) {
     fun saveReps(list: List<Rep>) {
         local.saveReps(list)
     }
+
 }

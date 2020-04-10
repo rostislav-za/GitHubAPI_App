@@ -1,33 +1,60 @@
-package progr.rostoslav.githubapi.ui.login
+package progr.rostoslav.githubapi.ui.activityes
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import progr.rostoslav.githubapi.R
+import progr.rostoslav.githubapi.data.local.APP_USER
 import progr.rostoslav.githubapi.data.local.USER_LOGIN
 import progr.rostoslav.githubapi.data.local.USER_PASSWORD
 import progr.rostoslav.githubapi.entities.User
-import progr.rostoslav.githubapi.ui.ActivityView
-import progr.rostoslav.githubapi.ui.MainActivity
 
-class LoginActivity : AppCompatActivity(), ActivityView {
+class LoginActivity : AppCompatActivity() {
     private val PASSWORD_SIZE_RANGE = 6..70
-
+    lateinit var pref: SharedPreferences
+    var email = ""
+    var pass = ""
+    var user = User("", "")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         init()
+        updateButtonMode()
+
+        pref = getSharedPreferences(APP_USER, AppCompatActivity.MODE_PRIVATE)
+        if ((pref.contains(USER_LOGIN))&&(pref.contains(USER_PASSWORD))){
+            email = pref.getString(USER_LOGIN, "") ?: ""
+            pass = pref.getString(USER_PASSWORD, "") ?: ""
+            user = User(email, pass)
+
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra(USER_LOGIN, user.email)
+            intent.putExtra(USER_PASSWORD, user.password)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun init() {
         al_btn_sign_in.setOnClickListener {
+            email = al_et_email.text.toString()
+            pass = al_et_password.text.toString()
+            user = User(email, pass)
+            val editor = pref.edit()
+            editor.putString(USER_LOGIN, user.email)
+            editor.putString(USER_PASSWORD, user.password)
+            editor.commit()
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra(USER_LOGIN,al_et_email.text.toString())
-            intent.putExtra(USER_PASSWORD, al_et_password.text.toString())
+            intent.putExtra(USER_LOGIN, user.email)
+            intent.putExtra(USER_PASSWORD, user.password)
             startActivity(intent)
+            finish()
         }
 
         al_et_email.addTextChangedListener(object : TextWatcher {
