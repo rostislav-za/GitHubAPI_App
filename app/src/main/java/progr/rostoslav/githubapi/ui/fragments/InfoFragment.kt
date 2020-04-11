@@ -35,7 +35,7 @@ class InfoFragment : BaseFragment() {
             title = "Обязательно должны отображаться:",
             text = "- Название\n" +
                     "- Информация об авторе (имя и аватар)",
-            isReady = false
+            isReady = true
         ),
         TaskInfo(
             title = "- Последние 10 коммитов",
