@@ -114,7 +114,6 @@ class InfoFragment : BaseFragment() {
         val divider = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         rv.layoutManager = LinearLayoutManager(activity)
         rv.adapter = adapter
-        rv.addItemDecoration(divider)
     }
 
     override fun setContent() {

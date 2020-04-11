@@ -24,7 +24,6 @@ class TaskAdapter(): BaseAdapter<TaskInfo>() {
         override fun bind(model:TaskInfo) {
             it_title.text= model.title
             it_text.text= model.text
-            if(model.text=="")it_text.isEnabled=false
             it_iv_checked.setImageResource( model.isReadyImg)
         }
     }
