@@ -13,15 +13,17 @@ class JSONParser() {
         val jsonArray = JSONArray(responseText)
         for (i in 0..jsonArray.length() - 1) {
             val jsonObject = jsonArray.getJSONObject(i)
+            val owner = JSONObject(jsonObject.getString("owner"))
             r.add(
                 Rep(
                     title = jsonObject.getString("name"),
-                    author = jsonObject.getString("full_name").split("/")[0],
+                    author = owner.getString("login"),
+                    autor_img = owner.getString("avatar_url"),
                     description = jsonObject.getString("description"),
                     lang = jsonObject.getString("language"),
                     forks_count = jsonObject.getInt("forks"),
                     stars_count = jsonObject.getInt("stargazers_count"),
-                    commits_count = jsonObject.getInt("open_issues_count") + 7//TODO FIX WRONG DATA
+                    commits_count = jsonObject.getInt("open_issues_count") + 37//TODO FIX WRONG DATA
                 )
             )
         }
@@ -60,8 +62,7 @@ class JSONParser() {
             val c_commiter = JSONObject(commit.getString("committer"))
             val avatar_url =
                 if (jsonObject.getString("committer") == "null") "https://avatars3.githubusercontent.com/u/19864447?v=4"
-             else JSONObject(jsonObject.getString("committer")).getString("avatar_url")
-
+                else JSONObject(jsonObject.getString("committer")).getString("avatar_url")
             r.add(
                 Commit(
                     author = c_commiter.getString("name"),
@@ -94,6 +95,7 @@ class JSONParser() {
         )
         return r
     }
+
     fun repItem(responseText: String): Rep {
         val jsonObject = JSONObject(responseText)
         val jO_owner = JSONObject(jsonObject.getString("owner"))

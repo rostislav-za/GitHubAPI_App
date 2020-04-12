@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import progr.rostoslav.githubapi.Action
+import progr.rostoslav.githubapi.Reducer
 import progr.rostoslav.githubapi.data.DataRepository
 import progr.rostoslav.githubapi.data.local.APP_USER
 import progr.rostoslav.githubapi.data.local.USER_LOGIN
@@ -18,8 +19,8 @@ import progr.rostoslav.githubapi.ui.activityes.BaseActivity
 import progr.rostoslav.githubapi.ui.activityes.LoginActivity
 import progr.rostoslav.githubapi.ui.activityes.MainActivity
 
-class AppModel() {
-   lateinit var dr :DataRepository
+class AppModel() : Reducer {
+    lateinit var dr: DataRepository
     var user = User("", "")
     lateinit var activity: AppCompatActivity
 
@@ -27,19 +28,19 @@ class AppModel() {
         activity = _activity
         user = User(email, pass)
         DataManager.updateUsername(user.email)
-        dr= DataRepository(this)
+        dr = DataRepository(this)
         dr.init(user.key)
 
         DataManager.udateReps(dr.getLoadedReps())
-
-        dr.getReps()
+//        dr.getReps()
+        dr.getUserReps("octokit")
         dr.getRepInfo("rostislav-za", "GitHubAPI")
         dr.getCommits("rostislav-za", "GitHubAPI")
     }
 
     fun onDestroy() = saveData()
 
-    fun reduce(a: Action) {
+    override fun reduce(a: Action) {
         when (a) {
             is Action.UIRepClickedAction -> {
                 dr.getRepInfo(a.rep)
@@ -51,7 +52,9 @@ class AppModel() {
                 val copy = a.rep.copy(isSaved = !a.rep.isSaved)
                 DataManager.updateRep(a.rep, copy)
             }
-            is Action.UIRefreshedListAction -> { dr.getReps() }
+            is Action.UIRefreshedListAction -> {
+                dr.getReps()
+            }
             is Action.RepInfoLoadedAction -> DataManager.udateRepInfo(a.rep_info)
             is Action.RepsLoadedAction -> {
                 DataManager.udateReps(mergeListFromNet(DataManager.getReps(), a.new_reps))
@@ -60,9 +63,9 @@ class AppModel() {
                 DataManager.updateCommits(a.new_commits)
             }
             is Action.RepItemLoadAction -> {
-                val list=DataManager.getReps()
-                  val r=  list.find{ it.title+it.author==a.rep.title+a.rep.author }
-                list[list.lastIndexOf(r)]=a.rep
+                val list = DataManager.getReps()
+                val r = list.find { it.title + it.author == a.rep.title + a.rep.author }
+                list[list.lastIndexOf(r)] = a.rep
                 DataManager.udateReps(list)
             }
         }
@@ -78,7 +81,7 @@ class AppModel() {
         val r = ArrayList<Rep>()
         for (i in old_list.filter { it.isSaved }) {
             val rep =
-                (new_list.findLast { (it.title+it.author+it.user_key==i.title+i.author+ i.user_key) })?.copy()
+                (new_list.findLast { (it.title + it.author + it.user_key == i.title + i.author + i.user_key) })?.copy()
             if (rep != null) new_list[new_list.lastIndexOf(rep)] =
                 rep.copy(isSaved = i.isSaved, user_key = i.user_key)
             else r.add(i)
@@ -86,6 +89,7 @@ class AppModel() {
         r.addAll(new_list)
         return r
     }
+
     fun saveData() = dr.saveReps(DataManager.getSavedReps())
 
 

@@ -1,17 +1,17 @@
 package progr.rostoslav.githubapi.ui
 
+import progr.rostoslav.githubapi.Store
 import progr.rostoslav.githubapi.entities.Commit
 import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.entities.RepInfo
 
-class DataManager {
+class DataManager :Store{
     companion object {
         private var username = ""
         private var rep_list = ArrayList<Rep>()
         private var rep_info = RepInfo()
 
         private val followersViews = ArrayList<FollowerView>()
-
 
         fun addFolower(follower: FollowerView) {
             if (!followersViews.contains(follower)) followersViews.add(follower)
