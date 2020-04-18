@@ -6,12 +6,8 @@ import progr.rostoslav.githubapi.entities.RepInfo
 
 class DataManager {
     companion object {
-        private var username = ""
-        private var rep_list = ArrayList<Rep>()
-        private var rep_info = RepInfo()
 
         private val followersViews = ArrayList<FollowerView>()
-
         fun addFolower(follower: FollowerView) {
             if (!followersViews.contains(follower)) followersViews.add(follower)
         }
@@ -24,22 +20,19 @@ class DataManager {
             for (i in followersViews) i.updateView()
         }
 
-
+        private var username = ""
         fun getUsername() = username + ""
-        fun getRepInfo() = rep_info
-
-        fun getReps() = rep_list
-
-        fun getSavedReps() = rep_list.filter { it.isSaved } as ArrayList<Rep>
-
-        fun updateUsername(_username: String) {
+        fun setUsername(_username: String) {
             username = _username
             updateFollowersViews()
         }
 
-        fun udateRepInfo(new: RepInfo) {
-            rep_info = new.copy(commits = rep_info.copy().commits)
-            updateFollowersViews()
+        private var rep_list = ArrayList<Rep>()
+        fun getReps() = rep_list
+        fun getSavedReps() = rep_list.filter { it.isSaved } as ArrayList<Rep>
+        fun updateRep(old: Rep, new: Rep) {
+            val position = rep_list.lastIndexOf(old)
+            if (position != (-1)) rep_list[position] = new
         }
 
         fun udateReps(new_reps: ArrayList<Rep>) {
@@ -47,9 +40,11 @@ class DataManager {
             updateFollowersViews()
         }
 
-        fun updateRep(old: Rep, new: Rep) {
-            val position = rep_list.lastIndexOf(old)
-            if (position != (-1)) rep_list[position] = new
+        private var rep_info = RepInfo()
+        fun getRepInfo() = rep_info
+        fun setRepInfo(new: RepInfo) {
+            rep_info = new.copy(commits = rep_info.copy().commits)
+            updateFollowersViews()
         }
 
         fun updateCommits(c: List<Commit>) {

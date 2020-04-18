@@ -20,7 +20,7 @@ class AppModel() : Reducer {
     fun onCreate(email: String, pass: String, _activity: AppCompatActivity) {
         activity = _activity
         user = User(email, pass)
-        DataManager.updateUsername(user.email)
+        DataManager.setUsername(user.email)
         dr = DataRepository(this)
         dr.init(user.key)
 
@@ -37,7 +37,7 @@ class AppModel() : Reducer {
             is Action.UIRepClickedAction -> {
                 dr.getRepInfo(a.rep)
                 dr.getCommits(a.rep.author, a.rep.title)
-                DataManager.udateRepInfo(a.rep.toRepInfo())
+                DataManager.setRepInfo(a.rep.toRepInfo())
                 DataManager.updateCommits(emptyList())
             }
             is Action.UIRepSavedChangedAction -> {
@@ -46,7 +46,7 @@ class AppModel() : Reducer {
             }
             is Action.UIRefreshedListAction -> dr.getReps()
 
-            is Action.RepInfoLoadedAction -> DataManager.udateRepInfo(a.rep_info)
+            is Action.RepInfoLoadedAction -> DataManager.setRepInfo(a.rep_info)
             is Action.RepsLoadedAction -> DataManager.udateReps(
                 mergeListFromNet(DataManager.getReps(), a.new_reps)
             )
