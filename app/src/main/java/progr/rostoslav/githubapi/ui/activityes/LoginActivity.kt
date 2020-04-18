@@ -1,7 +1,5 @@
 package progr.rostoslav.githubapi.ui.activityes
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -21,14 +19,15 @@ class LoginActivity : AppCompatActivity() {
     var email = ""
     var pass = ""
     var user = User("", "")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         init()
         updateButtonMode()
 
-        pref = getSharedPreferences(APP_USER, AppCompatActivity.MODE_PRIVATE)
-        if ((pref.contains(USER_LOGIN))&&(pref.contains(USER_PASSWORD))){
+        pref = getSharedPreferences(APP_USER, MODE_PRIVATE)
+        if ((pref.contains(USER_LOGIN)) && (pref.contains(USER_PASSWORD))) {
             email = pref.getString(USER_LOGIN, "") ?: ""
             pass = pref.getString(USER_PASSWORD, "") ?: ""
             user = User(email, pass)
@@ -49,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
             val editor = pref.edit()
             editor.putString(USER_LOGIN, user.email)
             editor.putString(USER_PASSWORD, user.password)
-            editor.commit()
+            editor.apply()
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra(USER_LOGIN, user.email)
             intent.putExtra(USER_PASSWORD, user.password)

@@ -1,23 +1,16 @@
 package progr.rostoslav.githubapi.domain
 
-import android.content.Intent
-import android.content.SharedPreferences
+
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import progr.rostoslav.githubapi.Action
 import progr.rostoslav.githubapi.Reducer
 import progr.rostoslav.githubapi.data.DataRepository
-import progr.rostoslav.githubapi.data.local.APP_USER
-import progr.rostoslav.githubapi.data.local.USER_LOGIN
-import progr.rostoslav.githubapi.data.local.USER_PASSWORD
 import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.entities.User
 import progr.rostoslav.githubapi.entities.toRepInfo
 import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.ui.activityes.ActionProvider
-import progr.rostoslav.githubapi.ui.activityes.BaseActivity
-import progr.rostoslav.githubapi.ui.activityes.LoginActivity
-import progr.rostoslav.githubapi.ui.activityes.MainActivity
 
 class AppModel() : Reducer {
     lateinit var dr: DataRepository
@@ -32,7 +25,6 @@ class AppModel() : Reducer {
         dr.init(user.key)
 
         DataManager.udateReps(dr.getLoadedReps())
-//        dr.getReps()
         dr.getUserReps("octokit")
         dr.getRepInfo("rostislav-za", "GitHubAPI")
         dr.getCommits("rostislav-za", "GitHubAPI")
@@ -52,16 +44,14 @@ class AppModel() : Reducer {
                 val copy = a.rep.copy(isSaved = !a.rep.isSaved)
                 DataManager.updateRep(a.rep, copy)
             }
-            is Action.UIRefreshedListAction -> {
-                dr.getReps()
-            }
+            is Action.UIRefreshedListAction -> dr.getReps()
+
             is Action.RepInfoLoadedAction -> DataManager.udateRepInfo(a.rep_info)
-            is Action.RepsLoadedAction -> {
-                DataManager.udateReps(mergeListFromNet(DataManager.getReps(), a.new_reps))
-            }
-            is Action.CommitsLoadedAction -> {
-                DataManager.updateCommits(a.new_commits)
-            }
+            is Action.RepsLoadedAction -> DataManager.udateReps(
+                mergeListFromNet(DataManager.getReps(), a.new_reps)
+            )
+            is Action.CommitsLoadedAction -> DataManager.updateCommits(a.new_commits)
+
             is Action.RepItemLoadAction -> {
                 val list = DataManager.getReps()
                 val r = list.find { it.title + it.author == a.rep.title + a.rep.author }
@@ -89,8 +79,5 @@ class AppModel() : Reducer {
         r.addAll(new_list)
         return r
     }
-
     fun saveData() = dr.saveReps(DataManager.getSavedReps())
-
-
 }

@@ -12,7 +12,6 @@ data class Rep(
     var isSaved: Boolean = false,
     var author: String = "",
     var autor_img: String = "",
-
     var user_key: String = ""
 ) {
     val isSavedRes = if (isSaved) R.drawable.saved

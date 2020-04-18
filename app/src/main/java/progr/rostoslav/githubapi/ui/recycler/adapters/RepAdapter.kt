@@ -25,7 +25,7 @@ class RepAdapter() : BaseAdapter<Rep>() {
 
     class ViewHolder(currentView: View, val callback: BaseAdapterCallback<Rep>?) :
         BaseViewHolder<Rep>(currentView)
-      , ItemTouchViewHolder {
+        , ItemTouchViewHolder {
         override fun bind(model: Rep) {
             ir_tv_title.text = model.title
             ir_tv_commits.text = "" + model.commits_count
@@ -45,8 +45,8 @@ class RepAdapter() : BaseAdapter<Rep>() {
         }
 
         override fun onItemSelected() {
-           // TODO некоторые холдеры запоминают цвет после смены контента.
-             //  проконтролировать очистку и возврат к дефолтному цвету при отпускании
+            // TODO некоторые холдеры запоминают цвет после смены контента.
+            //  проконтролировать очистку и возврат к дефолтному цвету при отпускании
             //  itemView.setBackgroundResource(R.color.color_primaryDark)
         }
 
@@ -57,25 +57,25 @@ class RepAdapter() : BaseAdapter<Rep>() {
     }
 
 
-   /* fun updateData(data: ArrayList<Rep>) {
-        val diffCallback = object : DiffUtil.Callback() {
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-                (items[oldItemPosition].title == data[newItemPosition].title) &&
-                        (items[oldItemPosition].author == data[newItemPosition].author)
+    /* fun updateData(data: ArrayList<Rep>) {
+         val diffCallback = object : DiffUtil.Callback() {
+             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+                 (items[oldItemPosition].title == data[newItemPosition].title) &&
+                         (items[oldItemPosition].author == data[newItemPosition].author)
 
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-                (items[oldItemPosition].hashCode() == data[newItemPosition].hashCode())
+             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+                 (items[oldItemPosition].hashCode() == data[newItemPosition].hashCode())
 
-            override fun getOldListSize() = items.size
-            override fun getNewListSize() = data.size
-        }
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        items = data
-        diffResult.dispatchUpdatesTo(this)
-    }
-    interface RepSelectedListener {
-        fun onRepSelected(rep: Rep, imageView: ImageView)
-    }
-*/
+             override fun getOldListSize() = items.size
+             override fun getNewListSize() = data.size
+         }
+         val diffResult = DiffUtil.calculateDiff(diffCallback)
+         items = data
+         diffResult.dispatchUpdatesTo(this)
+     }
+     interface RepSelectedListener {
+         fun onRepSelected(rep: Rep, imageView: ImageView)
+     }
+ */
 
 }

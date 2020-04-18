@@ -51,9 +51,13 @@ abstract class BaseAdapter<P> : RecyclerView.Adapter<BaseViewHolder<P>>() {
         notifyItemRemoved(position)
     }
 
-    fun attachCallback(callback: BaseAdapterCallback<P>) { this.callback = callback }
+    fun attachCallback(callback: BaseAdapterCallback<P>) {
+        this.callback = callback
+    }
 
-    fun detachCallback() { this.callback = null }
+    fun detachCallback() {
+        this.callback = null
+    }
 
     override fun getItemCount(): Int = items.count()
 

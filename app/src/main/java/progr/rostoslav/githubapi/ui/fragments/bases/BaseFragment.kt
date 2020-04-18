@@ -4,7 +4,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import progr.rostoslav.githubapi.ui.FollowerView
 
-abstract class BaseFragment : Fragment(), FollowerView{
+abstract class BaseFragment : Fragment(), FollowerView {
 
     override fun onStart() {
         init()
@@ -14,14 +14,14 @@ abstract class BaseFragment : Fragment(), FollowerView{
     }
 
     override fun onStop() {
-        toUnfollowView( this)
+        toUnfollowView(this)
         super.onStop()
     }
 
-    open fun init(){}
-    open fun setContent(){}
+    open fun init() {}
 
-    override fun updateView() {
-        setContent()
-    }
+    open fun setContent() {}
+
+    override fun updateView() = setContent()
+
 }

@@ -16,7 +16,6 @@ data class RepInfo(
     val created_at: String = "",
     val updated_at: String = "",
     val size: Int = 0,
-
     var commits: List<Commit> = emptyList()
 ){
     val isSavedRes = if (isSaved) R.drawable.saved

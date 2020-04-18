@@ -19,10 +19,10 @@ import progr.rostoslav.githubapi.ui.fragments.bases.BaseFragment
 import progr.rostoslav.githubapi.ui.recycler.adapters.CommitAdapter
 
 
-class DetailFragment :BaseFragment() {
-   val commitAdapter = CommitAdapter()
-   var list= listOf<Commit>()
-   var repos_Info: RepInfo = DataManager.getRepInfo()
+class DetailFragment : BaseFragment() {
+    val commitAdapter = CommitAdapter()
+    var list = listOf<Commit>()
+    var repos_Info: RepInfo = DataManager.getRepInfo()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +31,8 @@ class DetailFragment :BaseFragment() {
 
 
     override fun init() {
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         val divider = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         rv.layoutManager = LinearLayoutManager(activity)
         commitAdapter.setList(list)
@@ -43,11 +44,11 @@ class DetailFragment :BaseFragment() {
 
     override fun setContent() {
         repos_Info = DataManager.getRepInfo()
-        fr_tv_rep_name.text= repos_Info.title
-        fr_tv_author_name.text= repos_Info.login+"/"
+        fr_tv_rep_name.text = repos_Info.title
+        fr_tv_author_name.text = repos_Info.login + "/"
         fr_iv_fav.setImageResource(repos_Info.isSavedRes)
-      repos_Info.lang
-        fr_tv_info.text="(${repos_Info.lang}) ${repos_Info.description}"
+        repos_Info.lang
+        fr_tv_info.text = "(${repos_Info.lang}) ${repos_Info.description}"
         fr_iv_author.apply {
             transitionName = repos_Info.title
             Glide.with(context)
@@ -55,7 +56,7 @@ class DetailFragment :BaseFragment() {
                 .apply(RequestOptions.circleCropTransform())
                 .into(this)
         }
-        list =repos_Info.commits
+        list = repos_Info.commits
         commitAdapter.setList(list)
         super.setContent()
     }

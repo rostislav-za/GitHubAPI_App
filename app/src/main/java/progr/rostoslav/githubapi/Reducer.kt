@@ -1,5 +1,5 @@
 package progr.rostoslav.githubapi
 
 interface Reducer {
-    fun reduce(a:Action)
+    fun reduce(a: Action)
 }

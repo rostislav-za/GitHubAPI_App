@@ -16,7 +16,7 @@ fun Rep.toRepRealm(): RepRealm {
 }
 
 fun RepRealm.toRep(): Rep {
-    var r = Rep(
+    val r = Rep(
         title = this.title,
         description = this.description,
         lang = this.lang,
@@ -32,17 +32,16 @@ fun RepRealm.toRep(): Rep {
 }
 
 fun List<RepRealm>.toRepList(): ArrayList<Rep> {
-    var r = ArrayList<Rep>()
+    val r = ArrayList<Rep>()
     for (i in this) r.add(i.toRep())
     return r
 }
 
 fun List<Rep>.toRealmList(): List<RepRealm> {
-    var r = ArrayList<RepRealm>()
+    val r = ArrayList<RepRealm>()
     for (i in this) r.add(i.toRepRealm())
     return r
 }
-
 
 fun Rep.toRepInfo(): RepInfo {
     return RepInfo(

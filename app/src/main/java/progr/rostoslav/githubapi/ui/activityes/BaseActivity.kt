@@ -20,6 +20,7 @@ import progr.rostoslav.githubapi.ui.FollowerView
 abstract class BaseActivity : AppCompatActivity(), ActionProvider, FollowerView {
     lateinit var app_model: AppModel
     lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,7 +33,7 @@ abstract class BaseActivity : AppCompatActivity(), ActionProvider, FollowerView 
     }
 
     fun clearSharedPref() {
-        val pref = getSharedPreferences(APP_USER, AppCompatActivity.MODE_PRIVATE)
+        val pref = getSharedPreferences(APP_USER, MODE_PRIVATE)
         val editor = pref.edit()
         editor.clear()
         editor.apply()

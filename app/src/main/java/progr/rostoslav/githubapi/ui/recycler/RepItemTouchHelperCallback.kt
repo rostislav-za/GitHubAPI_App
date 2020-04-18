@@ -24,11 +24,11 @@ class RepItemTouchHelperCallback(
 
     override fun getMovementFlags(
         recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder
-    ) = if (viewHolder is ItemTouchViewHolder) {
-        makeFlag(ItemTouchHelper.ACTION_STATE_SWIPE, ItemTouchHelper.START)
-    } else {
-        makeFlag(ItemTouchHelper.ACTION_STATE_IDLE, ItemTouchHelper.START)
-    }
+    ) = if (viewHolder is ItemTouchViewHolder) makeFlag(
+        ItemTouchHelper.ACTION_STATE_SWIPE,
+        ItemTouchHelper.START
+    )
+    else makeFlag(ItemTouchHelper.ACTION_STATE_IDLE, ItemTouchHelper.START)
 
 
     override fun onMove(
@@ -37,9 +37,8 @@ class RepItemTouchHelperCallback(
         target: RecyclerView.ViewHolder
     ) = false
 
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) =
         swipeListener.invoke(adapter.getList()[viewHolder.adapterPosition])
-    }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         if (actionState != ItemTouchHelper.ACTION_STATE_IDLE && viewHolder is ItemTouchViewHolder

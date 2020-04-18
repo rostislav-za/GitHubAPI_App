@@ -1,11 +1,10 @@
 package progr.rostoslav.githubapi.ui
 
-import progr.rostoslav.githubapi.Store
 import progr.rostoslav.githubapi.entities.Commit
 import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.entities.RepInfo
 
-class DataManager :Store{
+class DataManager {
     companion object {
         private var username = ""
         private var rep_list = ArrayList<Rep>()

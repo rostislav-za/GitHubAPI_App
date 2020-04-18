@@ -6,8 +6,7 @@ import progr.rostoslav.githubapi.entities.Commit
 import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.entities.RepInfo
 
-class JSONParser() {
-    val ERROR = "\"documentation_url\": \"https://developer.github.com/"
+class JSONParser {
     fun repUserList(responseText: String): ArrayList<Rep> {
         val r = ArrayList<Rep>()
         val jsonArray = JSONArray(responseText)
@@ -53,6 +52,7 @@ class JSONParser() {
     }
 
     fun commitList(responseText: String): ArrayList<Commit> {
+        val def_img_url = "https://avatars3.githubusercontent.com/u/19864447?v=4"
         val r = ArrayList<Commit>()
         val jsonArray = JSONArray(responseText)
         for (i in 0..jsonArray.length() - 1) {
@@ -61,7 +61,7 @@ class JSONParser() {
             val commit = JSONObject(jsonObject.getString("commit"))
             val c_commiter = JSONObject(commit.getString("committer"))
             val avatar_url =
-                if (jsonObject.getString("committer") == "null") "https://avatars3.githubusercontent.com/u/19864447?v=4"
+                if (jsonObject.getString("committer") == "null") def_img_url
                 else JSONObject(jsonObject.getString("committer")).getString("avatar_url")
             r.add(
                 Commit(
@@ -78,7 +78,6 @@ class JSONParser() {
     fun repInfo(responseText: String): RepInfo {
         val jsonObject = JSONObject(responseText)
         val jO_owner = JSONObject(jsonObject.getString("owner"))
-
         val r = RepInfo(
             title = jsonObject.getString("name"),
             description = jsonObject.getString("description"),
