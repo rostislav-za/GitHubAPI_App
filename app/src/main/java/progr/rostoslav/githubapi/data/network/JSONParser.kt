@@ -4,7 +4,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import progr.rostoslav.githubapi.entities.Commit
 import progr.rostoslav.githubapi.entities.Rep
-//import progr.rostoslav.githubapi.entities.RepInfo
 
 class JSONParser {
     fun repUserList(responseText: String): ArrayList<Rep> {
@@ -77,25 +76,6 @@ class JSONParser {
         return r
     }
 
-//    fun repInfo(responseText: String): RepInfo {
-//        val jsonObject = JSONObject(responseText)
-//        val jO_owner = JSONObject(jsonObject.getString("owner"))
-//        val r = RepInfo(
-//            title = jsonObject.getString("name"),
-//            description = jsonObject.getString("description"),
-//            lang = jsonObject.getString("language"),
-//            forks_count = jsonObject.getInt("forks"),
-//            stars_count = jsonObject.getInt("stargazers_count"),
-//            commits_count = jsonObject.getInt("open_issues_count") + 7,//TODO FIX WRONG DATA
-//            full_name = jsonObject.getString("full_name"),
-//            login = jO_owner.getString("login"),
-//            avatar_url = jO_owner.getString("avatar_url"),
-//            created_at = jsonObject.getString("created_at"),
-//            updated_at = jsonObject.getString("updated_at"),
-//            size = jsonObject.getInt("size")
-//        )
-//        return r
-//    }
 
     fun repItem(responseText: String): Rep {
         val jsonObject = JSONObject(responseText)
@@ -107,7 +87,7 @@ class JSONParser {
             lang = jsonObject.getString("language"),
             forks_count = jsonObject.getInt("forks"),
             stars_count = jsonObject.getInt("stargazers_count"),
-            commits_count = jsonObject.getInt("open_issues_count") + 7,//TODO FIX WRONG DATA
+            commits_count = 0,
             autor_img = jO_owner.getString("avatar_url"),
             created_at = jsonObject.getString("created_at"),
             updated_at = jsonObject.getString("updated_at"),

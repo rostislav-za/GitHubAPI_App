@@ -26,9 +26,5 @@ class DataRepository(val model: AppModel) {
 
     fun getUserReps(author: String) = net.getRepsFromServer(author)
 
-//    fun getRepInfo(rep: Rep) = net.getRepFromServer(rep.author, rep.title)
-
-//    fun getRepInfo(author: String, title: String) = net.getRepFromServer(author, title)
-
     fun saveReps(list: List<Rep>) = local.saveReps(list, user_key)
 }

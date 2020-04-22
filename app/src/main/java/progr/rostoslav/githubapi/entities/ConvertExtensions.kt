@@ -42,17 +42,3 @@ fun List<Rep>.toRealmList(): List<RepRealm> {
     for (i in this) r.add(i.toRepRealm())
     return r
 }
-
-//fun Rep.toRepInfo(): RepInfo {
-//    return RepInfo(
-//        title = this.title,
-//        lang = this.lang,
-//        stars_count = this.stars_count,
-//        commits_count = this.commits_count,
-//        forks_count = this.forks_count,
-//        isSaved = this.isSaved,
-//        description = this.description,
-//        full_name = this.author,
-//        avatar_url = this.autor_img
-//    )
-//}

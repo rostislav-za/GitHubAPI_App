@@ -27,8 +27,6 @@ class AppModel() : Reducer {
         DataManager.udateReps(dr.getLoadedReps())
         // dr.getUserReps("octokit")
         dr.getReps()
-
-//        dr.getRepInfo("rostislav-za", "GitHubAPI")
         dr.getCommits("rostislav-za", "GitHubAPI")
     }
 
@@ -37,7 +35,6 @@ class AppModel() : Reducer {
     override fun reduce(a: Action) {
         when (a) {
             is Action.UIRepClickedAction -> {
-                // dr.getRepInfo(a.rep)
                 dr.getCommits(a.rep.author, a.rep.title)
               val ind = DataManager.getReps().indexOf(a.rep)
                 DataManager.setRepInfo(ind)
@@ -48,7 +45,6 @@ class AppModel() : Reducer {
             }
             is Action.UIRefreshedListAction -> dr.getReps()
 
-            //is Action.RepInfoLoadedAction -> DataManager.setRepInfo(a)
             is Action.RepsLoadedAction -> {
                 DataManager.udateReps(mergeListFromNet(DataManager.getReps(), a.new_reps))
                 dr.getRepItems(DataManager.getReps().subList(0, 5))
@@ -59,13 +55,12 @@ class AppModel() : Reducer {
                 list[list.lastIndexOf(r)].commits_count = a.new_commits.size
                 list[list.lastIndexOf(r)].commits = a.new_commits
                 DataManager.udateReps(list)
-              //  DataManager.updateCommits(a.new_commits)
             }
             is Action.RepItemLoadAction -> {
                 a.rep.user_key = user.key + ""
                 val list = DataManager.getReps()
                 val r = list.findLast { (it.title == a.rep.title) && (it.author == a.rep.author) }
-                list[list.lastIndexOf(r)] = a.rep
+               if(r!=null)list[list.lastIndexOf(r)] = a.rep.copy(commits_count = r.commits_count,commits = r.commits)
 
                 DataManager.udateReps(list)
             }

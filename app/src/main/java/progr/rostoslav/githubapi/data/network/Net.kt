@@ -30,9 +30,6 @@ class Net(dr: DataRepository, user: User) {
         }
     }
 
-//    fun getRepFromServer(author: String, rep_name: String) =
-//        api().getRep(author, rep_name).enqueue(cb.repInfo)
-
     fun getRepsFromServer(author: String = "octocat") =
         api().getUserReps(author).enqueue(cb.userReps)
 
