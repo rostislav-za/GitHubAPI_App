@@ -14,21 +14,19 @@ import kotlinx.android.synthetic.main.include_recycler.*
 import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.R
 import progr.rostoslav.githubapi.entities.Commit
-import progr.rostoslav.githubapi.entities.RepInfo
+import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.ui.fragments.bases.BaseFragment
 import progr.rostoslav.githubapi.ui.recycler.adapters.CommitAdapter
-
 
 class DetailFragment : BaseFragment() {
     val commitAdapter = CommitAdapter()
     var list = listOf<Commit>()
-    var repos_Info: RepInfo = DataManager.getRepInfo()
+    var repos_Info: Rep = DataManager.getRepInfo()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_detail, container, false)
-
 
     override fun init() {
         sharedElementEnterTransition =
@@ -45,14 +43,14 @@ class DetailFragment : BaseFragment() {
     override fun setContent() {
         repos_Info = DataManager.getRepInfo()
         fr_tv_rep_name.text = repos_Info.title
-        fr_tv_author_name.text = repos_Info.login + "/"
+        fr_tv_author_name.text = repos_Info.author + "/"
         fr_iv_fav.setImageResource(repos_Info.isSavedRes)
         repos_Info.lang
         fr_tv_info.text = "(${repos_Info.lang}) ${repos_Info.description}"
         fr_iv_author.apply {
             transitionName = repos_Info.title
             Glide.with(context)
-                .load(repos_Info.avatar_url)
+                .load(repos_Info.autor_img)
                 .apply(RequestOptions.circleCropTransform())
                 .into(this)
         }
@@ -60,7 +58,5 @@ class DetailFragment : BaseFragment() {
         commitAdapter.setList(list)
         super.setContent()
     }
-
-
 }
 

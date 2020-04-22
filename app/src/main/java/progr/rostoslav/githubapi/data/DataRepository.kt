@@ -1,5 +1,7 @@
 package progr.rostoslav.githubapi.data
 
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import progr.rostoslav.githubapi.data.local.*
 import progr.rostoslav.githubapi.data.network.Net
 import progr.rostoslav.githubapi.domain.AppModel
@@ -20,13 +22,13 @@ class DataRepository(val model: AppModel) {
 
     fun getReps() = net.getGlobalRepsFromServer()
 
-    fun getRepItems(reps: List<Rep>) = net.getGlobalRepsItemsFromServer(reps)
+    fun getRepItems(reps: List<Rep>) = runBlocking { launch {(net.getGlobalRepsItemsFromServer(reps))}}
 
     fun getUserReps(author: String) = net.getRepsFromServer(author)
 
-    fun getRepInfo(rep: Rep) = net.getRepFromServer(rep.author, rep.title)
+//    fun getRepInfo(rep: Rep) = net.getRepFromServer(rep.author, rep.title)
 
-    fun getRepInfo(author: String, title: String) = net.getRepFromServer(author, title)
+//    fun getRepInfo(author: String, title: String) = net.getRepFromServer(author, title)
 
     fun saveReps(list: List<Rep>) = local.saveReps(list, user_key)
 }

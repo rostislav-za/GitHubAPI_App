@@ -1,5 +1,6 @@
 package progr.rostoslav.githubapi.data.network
 
+import kotlinx.coroutines.delay
 import progr.rostoslav.githubapi.data.DataRepository
 import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.entities.User
@@ -20,12 +21,17 @@ class Net(dr: DataRepository, user: User) {
 
     fun getGlobalRepsFromServer() = api().getGlobalReps().enqueue(cb.globalReps)
 
-    fun getGlobalRepsItemsFromServer(reps: List<Rep>) {
-        for (i in reps) api().getRep(i.author, i.title).enqueue(cb.repItem)
+    suspend fun getGlobalRepsItemsFromServer(reps: List<Rep>) {
+        for (i in reps) {
+            delay(100)
+            api().getRep(i.author, i.title).enqueue(cb.repItem)
+            delay(100)
+            api().getCommits(i.author, i.title).enqueue(cb.commits)
+        }
     }
 
-    fun getRepFromServer(author: String, rep_name: String) =
-        api().getRep(author, rep_name).enqueue(cb.repInfo)
+//    fun getRepFromServer(author: String, rep_name: String) =
+//        api().getRep(author, rep_name).enqueue(cb.repInfo)
 
     fun getRepsFromServer(author: String = "octocat") =
         api().getUserReps(author).enqueue(cb.userReps)

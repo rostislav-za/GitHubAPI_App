@@ -4,5 +4,6 @@ data class Commit(
     val title: String,
     val author_img: String,
     val author: String,
-    val date: String
+    val date: String,
+    val parent: String
 ) {}

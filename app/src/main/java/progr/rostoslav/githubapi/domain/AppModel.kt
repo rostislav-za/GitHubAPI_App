@@ -2,13 +2,13 @@ package progr.rostoslav.githubapi.domain
 
 
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import progr.rostoslav.githubapi.Action
 import progr.rostoslav.githubapi.Reducer
 import progr.rostoslav.githubapi.data.DataRepository
 import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.entities.User
-import progr.rostoslav.githubapi.entities.toRepInfo
 import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.ui.activityes.ActionProvider
 
@@ -25,8 +25,10 @@ class AppModel() : Reducer {
         dr.init(user.key)
 
         DataManager.udateReps(dr.getLoadedReps())
-        dr.getUserReps("octokit")
-        dr.getRepInfo("rostislav-za", "GitHubAPI")
+        // dr.getUserReps("octokit")
+        dr.getReps()
+
+//        dr.getRepInfo("rostislav-za", "GitHubAPI")
         dr.getCommits("rostislav-za", "GitHubAPI")
     }
 
@@ -35,10 +37,10 @@ class AppModel() : Reducer {
     override fun reduce(a: Action) {
         when (a) {
             is Action.UIRepClickedAction -> {
-                dr.getRepInfo(a.rep)
+                // dr.getRepInfo(a.rep)
                 dr.getCommits(a.rep.author, a.rep.title)
-                DataManager.setRepInfo(a.rep.toRepInfo())
-                DataManager.updateCommits(emptyList())
+              val ind = DataManager.getReps().indexOf(a.rep)
+                DataManager.setRepInfo(ind)
             }
             is Action.UIRepSavedChangedAction -> {
                 val copy = a.rep.copy(isSaved = !a.rep.isSaved)
@@ -46,16 +48,25 @@ class AppModel() : Reducer {
             }
             is Action.UIRefreshedListAction -> dr.getReps()
 
-            is Action.RepInfoLoadedAction -> DataManager.setRepInfo(a.rep_info)
-            is Action.RepsLoadedAction -> DataManager.udateReps(
-                mergeListFromNet(DataManager.getReps(), a.new_reps)
-            )
-            is Action.CommitsLoadedAction -> DataManager.updateCommits(a.new_commits)
-
-            is Action.RepItemLoadAction -> {
+            //is Action.RepInfoLoadedAction -> DataManager.setRepInfo(a)
+            is Action.RepsLoadedAction -> {
+                DataManager.udateReps(mergeListFromNet(DataManager.getReps(), a.new_reps))
+                dr.getRepItems(DataManager.getReps().subList(0, 5))
+            }
+            is Action.CommitsLoadedAction -> {
                 val list = DataManager.getReps()
-                val r = list.find { it.title + it.author == a.rep.title + a.rep.author }
+                val r = list.findLast { (it.author + "/" + it.title == a.new_commits[0].parent) }
+                list[list.lastIndexOf(r)].commits_count = a.new_commits.size
+                list[list.lastIndexOf(r)].commits = a.new_commits
+                DataManager.udateReps(list)
+              //  DataManager.updateCommits(a.new_commits)
+            }
+            is Action.RepItemLoadAction -> {
+                a.rep.user_key = user.key + ""
+                val list = DataManager.getReps()
+                val r = list.findLast { (it.title == a.rep.title) && (it.author == a.rep.author) }
                 list[list.lastIndexOf(r)] = a.rep
+
                 DataManager.udateReps(list)
             }
         }
@@ -79,5 +90,6 @@ class AppModel() : Reducer {
         r.addAll(new_list)
         return r
     }
+
     fun saveData() = dr.saveReps(DataManager.getSavedReps())
 }

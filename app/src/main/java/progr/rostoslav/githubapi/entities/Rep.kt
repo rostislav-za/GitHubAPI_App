@@ -8,11 +8,15 @@ data class Rep(
     val lang: String,
     val forks_count: Int,
     val stars_count: Int,
-    val commits_count: Int,
+    var commits_count: Int,
     var isSaved: Boolean = false,
     var author: String = "",
     var autor_img: String = "",
-    var user_key: String = ""
+    var user_key: String = "",
+    var commits: ArrayList<Commit> = ArrayList<Commit>(),
+    val created_at: String = "",
+    val updated_at: String = "",
+    val size: Int = 0
 ) {
     val isSavedRes = if (isSaved) R.drawable.saved
     else R.drawable.unsaved

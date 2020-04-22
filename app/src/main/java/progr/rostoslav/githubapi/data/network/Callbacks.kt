@@ -37,14 +37,14 @@ open class Callbacks(dr: DataRepository) {
         }
     }
 
-    val repInfo: Callback<ResponseBody> = object : Callback<ResponseBody> {
-        override fun onFailure(call: Call<ResponseBody>, t: Throwable) = t.printStackTrace()
-
-        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-            val responseText = response.body()?.string()
-            responseText?.let { dr.model.reduce(Action.RepInfoLoadedAction(parser.repInfo(it))) }
-        }
-    }
+//    val repInfo: Callback<ResponseBody> = object : Callback<ResponseBody> {
+//        override fun onFailure(call: Call<ResponseBody>, t: Throwable) = t.printStackTrace()
+//
+//        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+//            val responseText = response.body()?.string()
+//            responseText?.let { dr.model.reduce(Action.RepInfoLoadedAction(parser.repInfo(it))) }
+//        }
+//    }
 
     val repItem: Callback<ResponseBody> = object : Callback<ResponseBody> {
         override fun onFailure(call: Call<ResponseBody>, t: Throwable) = t.printStackTrace()

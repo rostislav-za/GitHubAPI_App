@@ -14,7 +14,8 @@ class FakeData {
                 "HardCommit № $i",
                 "https://avatars0.githubusercontent.com/u/17958266?v=4",
                 "Rstislav_hardIni",
-                "2019-01-25T03:43:57Z"
+                "2019-01-25T03:43:57Z",
+                ""
             )
         )
         return r
@@ -25,7 +26,7 @@ class FakeData {
         for (i in 0..count) r.add(
             Rep(
                 title = "Repository name  $i",
-                description = "This is a god project",
+                description = "This is a good project",
                 lang = langs[i % 7],
                 forks_count = i * (i % 2) + 2 * i + 7,
                 stars_count = i * (i % 4) + i,
