@@ -8,12 +8,12 @@ import progr.rostoslav.githubapi.domain.AppModel
 import progr.rostoslav.githubapi.entities.Rep
 
 class DataRepository(val model: AppModel) {
-    private val fakeData = FakeData()
     private val net = Net(this, model.user)
     private val local = Local()
     lateinit var user_key: String
     fun init(_user_key: String) {
         user_key = _user_key
+        net.initApi()
     }
 
     fun getLoadedReps() = local.getReps(user_key)
