@@ -2,17 +2,15 @@ package progr.rostoslav.githubapi.domain
 
 
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import progr.rostoslav.githubapi.Action
-import progr.rostoslav.githubapi.Reducer
 import progr.rostoslav.githubapi.data.DataRepository
 import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.entities.User
 import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.ui.activityes.ActionProvider
 
-class AppModel() : Reducer {
+class AppModel() {
     lateinit var dr: DataRepository
     var user = User("", "")
     lateinit var activity: AppCompatActivity
@@ -32,7 +30,7 @@ class AppModel() : Reducer {
 
     fun onDestroy() = saveData()
 
-    override fun reduce(a: Action) {
+  fun reduce(a: Action) {
         when (a) {
             is Action.UIRepClickedAction -> {
                 dr.getCommits(a.rep.author, a.rep.title)
@@ -42,21 +40,22 @@ class AppModel() : Reducer {
             is Action.UIRepSavedChangedAction -> {
                 val copy = a.rep.copy(isSaved = !a.rep.isSaved)
                 DataManager.updateRep(a.rep, copy)
+                dr.saveReps(DataManager.getSavedReps())
             }
             is Action.UIRefreshedListAction -> dr.getReps()
 
-            is Action.RepsLoadedAction -> {
+            is Action.NWRepsLoadedAction -> {
                 DataManager.udateReps(mergeListFromNet(DataManager.getReps(), a.new_reps))
                 dr.getRepItems(DataManager.getReps().subList(0, 5))
             }
-            is Action.CommitsLoadedAction -> {
+            is Action.NWCommitsLoadedAction -> {
                 val list = DataManager.getReps()
                 val r = list.findLast { (it.author + "/" + it.title == a.new_commits[0].parent) }
                 list[list.lastIndexOf(r)].commits_count = a.new_commits.size
                 list[list.lastIndexOf(r)].commits = a.new_commits
                 DataManager.udateReps(list)
             }
-            is Action.RepItemLoadAction -> {
+            is Action.NWRepItemLoadAction -> {
                 a.rep.user_key = user.key + ""
                 val list = DataManager.getReps()
                 val r = list.findLast { (it.title == a.rep.title) && (it.author == a.rep.author) }

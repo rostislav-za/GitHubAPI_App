@@ -3,8 +3,6 @@ package progr.rostoslav.githubapi.ui
 import progr.rostoslav.githubapi.entities.Commit
 import progr.rostoslav.githubapi.entities.Rep
 
-//import progr.rostoslav.githubapi.entities.RepInfo
-
 class DataManager {
     companion object {
 

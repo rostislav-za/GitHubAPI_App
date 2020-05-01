@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,21 +16,34 @@ import kotlinx.android.synthetic.main.item_rep.*
 import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.R
 import progr.rostoslav.githubapi.entities.Rep
+import progr.rostoslav.githubapi.ui.FollowerView
 import progr.rostoslav.githubapi.ui.activityes.ActionProvider
 import progr.rostoslav.githubapi.ui.recycler.RepItemTouchHelperCallback
 import progr.rostoslav.githubapi.ui.recycler.adapters.RepAdapter
 import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapterCallback
 
-abstract class BaseRepListFragment : BaseFragment() {
+abstract class BaseRepListFragment : Fragment(), FollowerView {
     val adapter = RepAdapter()
     lateinit var list: ArrayList<Rep>
+    override fun onStart() {
+        init()
+        toFollowView(this)
+        setContent()
+        super.onStart()
+    }
+
+
+    override fun onStop() {
+        toUnfollowView(this)
+        super.onStop()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_rep_list, container, false)
 
-    override fun init() {
+    open fun init() {
         setListeners()
         initRecyclerView()
         srl.setOnRefreshListener { refreshSwyped() }
@@ -42,6 +56,8 @@ abstract class BaseRepListFragment : BaseFragment() {
         rv.adapter = adapter
         rv.addItemDecoration(divider)
     }
+
+    override fun updateView() = setContent()
 
     open fun setListeners() {
         adapter.attachCallback(object : BaseAdapterCallback<Rep> {
@@ -66,7 +82,7 @@ abstract class BaseRepListFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(rv)
     }
 
-    override fun setContent() {
+    open fun setContent() {
         srl.isRefreshing = false
         list = DataManager.getReps()
         adapter.setList(list)

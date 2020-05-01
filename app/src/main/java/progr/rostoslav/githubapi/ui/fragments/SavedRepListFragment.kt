@@ -12,14 +12,26 @@ import kotlinx.android.synthetic.main.item_rep.*
 import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.R
 import progr.rostoslav.githubapi.entities.Rep
+import progr.rostoslav.githubapi.ui.FollowerView
 import progr.rostoslav.githubapi.ui.activityes.ActionProvider
 import progr.rostoslav.githubapi.ui.fragments.bases.BaseRepListFragment
 import progr.rostoslav.githubapi.ui.recycler.RepItemTouchHelperCallback
 import progr.rostoslav.githubapi.ui.recycler.bases.BaseAdapterCallback
 
-class SavedRepListFragment : BaseRepListFragment() {
+class SavedRepListFragment : BaseRepListFragment(), FollowerView {
+    override fun onStart() {
+        init()
+        toFollowView(this)
+        setContent()
+        super.onStart()
+    }
 
-    override fun init() {
+
+    override fun onStop() {
+        toUnfollowView(this)
+        super.onStop()
+    }
+     override fun init() {
         adapter.attachCallback(object : BaseAdapterCallback<Rep> {
             override fun onItemClick(model: Rep, view: View) {
                 (activity as ActionProvider).repItemClicked(model)

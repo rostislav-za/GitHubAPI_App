@@ -2,9 +2,9 @@ package progr.rostoslav.githubapi.ui.fragments
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -15,20 +15,33 @@ import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.R
 import progr.rostoslav.githubapi.entities.Commit
 import progr.rostoslav.githubapi.entities.Rep
-import progr.rostoslav.githubapi.ui.fragments.bases.BaseFragment
+import progr.rostoslav.githubapi.ui.FollowerView
 import progr.rostoslav.githubapi.ui.recycler.adapters.CommitAdapter
 
-class DetailFragment : BaseFragment() {
+class DetailFragment : Fragment(), FollowerView {
     val commitAdapter = CommitAdapter()
     var list = listOf<Commit>()
     var repos_Info: Rep = DataManager.getRepInfo()
+
+    override fun onStart() {
+        init()
+        toFollowView(this)
+        setContent()
+        super.onStart()
+    }
+
+
+    override fun onStop() {
+        toUnfollowView(this)
+        super.onStop()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_detail, container, false)
 
-    override fun init() {
+    fun init() {
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         val divider = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
@@ -36,11 +49,10 @@ class DetailFragment : BaseFragment() {
         commitAdapter.setList(list)
         rv.adapter = commitAdapter
         rv.addItemDecoration(divider)
-        super.init()
         setContent()
     }
 
-    override fun setContent() {
+    fun setContent() {
         repos_Info = DataManager.getRepInfo()
         fr_tv_rep_name.text = repos_Info.title
         fr_tv_author_name.text = repos_Info.author + "/"
@@ -56,7 +68,9 @@ class DetailFragment : BaseFragment() {
         }
         list = repos_Info.commits
         commitAdapter.setList(list)
-        super.setContent()
+
     }
+
+    override fun updateView() = setContent()
 }
 
