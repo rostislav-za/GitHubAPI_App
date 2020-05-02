@@ -3,8 +3,6 @@ package progr.rostoslav.githubapi.ui
 import progr.rostoslav.githubapi.entities.Commit
 import progr.rostoslav.githubapi.entities.Rep
 
-//import progr.rostoslav.githubapi.entities.RepInfo
-
 class DataManager {
     companion object {
 
@@ -17,15 +15,15 @@ class DataManager {
             if (followersViews.contains(follower)) followersViews.remove(follower)
         }
 
-        private fun updateFollowersViews() {
+        fun updateFollowersViews() {
             for (i in followersViews) i.updateView()
         }
 
         private var username = ""
         fun getUsername() = username + ""
-        fun setUsername(_username: String) {
+        fun setUsername(_username: String, updateUI:Boolean= true) {
             username = _username
-            updateFollowersViews()
+            if( updateUI)updateFollowersViews()
         }
 
         private var rep_list = ArrayList<Rep>()
@@ -36,9 +34,9 @@ class DataManager {
             if (position != (-1)) rep_list[position] = new
         }
 
-        fun udateReps(new_reps: ArrayList<Rep>) {
+        fun udateReps(new_reps: ArrayList<Rep>, updateUI:Boolean= true) {
             rep_list = new_reps
-            updateFollowersViews()
+            if( updateUI) updateFollowersViews()
         }
 
         private var rep_info: Int = 0
@@ -49,14 +47,15 @@ class DataManager {
                 rep_list[rep_info]
             }
         }
-        fun setRepInfo(new: Int) {
+        fun setRepInfo(new: Int, updateUI:Boolean= true) {
             if (new in 0..rep_list.lastIndex) rep_info = new + 0
-            updateFollowersViews()
+           if( updateUI)updateFollowersViews()
         }
 
-        fun updateCommits(c: ArrayList<Commit>) {
+        fun updateCommits(c: ArrayList<Commit>, updateUI:Boolean= true) {
             getRepInfo().commits = c
-            updateFollowersViews()
+            if( updateUI)updateFollowersViews()
         }
+
     }
 }

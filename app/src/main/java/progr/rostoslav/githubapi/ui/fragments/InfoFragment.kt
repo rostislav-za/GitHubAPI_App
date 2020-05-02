@@ -1,19 +1,17 @@
 package progr.rostoslav.githubapi.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.include_recycler.*
 import progr.rostoslav.githubapi.R
 import progr.rostoslav.githubapi.entities.TaskInfo
-import progr.rostoslav.githubapi.ui.fragments.bases.BaseFragment
+import progr.rostoslav.githubapi.ui.FollowerView
 import progr.rostoslav.githubapi.ui.recycler.adapters.TaskAdapter
 
-class InfoFragment : BaseFragment() {
+class InfoFragment : Fragment(R.layout.fragment_info) , FollowerView {
     val adapter = TaskAdapter()
     val list = listOf<TaskInfo>(
         TaskInfo(
@@ -103,20 +101,26 @@ class InfoFragment : BaseFragment() {
             text = ""
         )
     )
+    override fun onStart() {
+        init()
+        toFollowView(this)
+        setContent()
+        super.onStart()
+    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_info, container, false)
 
-    override fun init() {
-        super.init()
+    override fun onStop() {
+        toUnfollowView(this)
+        super.onStop()
+    }
+     fun init() {
         rv.layoutManager = LinearLayoutManager(activity)
         rv.adapter = adapter
     }
 
-    override fun setContent() {
-        super.setContent()
-        adapter.setList(list)
-    }
+    fun setContent() =adapter.setList(list)
+
+
+    override fun updateView() =setContent()
+
 }

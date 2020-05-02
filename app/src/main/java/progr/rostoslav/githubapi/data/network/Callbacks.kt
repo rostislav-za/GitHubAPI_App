@@ -15,7 +15,7 @@ open class Callbacks(dr: DataRepository) {
 
         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
             val responseText = response.body()?.string()
-            responseText?.let { dr.model.reduce(Action.CommitsLoadedAction(parser.commitList(it))) }
+            responseText?.let { dr.model.reduce(Action.NWCommitsLoadedAction(parser.commitList(it))) }
         }
     }
 
@@ -24,7 +24,7 @@ open class Callbacks(dr: DataRepository) {
 
         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
             val responseText = response.body()?.string()
-            responseText?.let { dr.model.reduce(Action.RepsLoadedAction(parser.repUserList(it))) }
+            responseText?.let { dr.model.reduce(Action.NWRepsLoadedAction(parser.repUserList(it))) }
         }
     }
 
@@ -33,7 +33,7 @@ open class Callbacks(dr: DataRepository) {
 
         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
             val responseText = response.body()?.string()
-            responseText?.let { dr.model.reduce(Action.RepsLoadedAction(parser.repGlobalList(it))) }
+            responseText?.let { dr.model.reduce(Action.NWRepsLoadedAction(parser.repGlobalList(it))) }
         }
     }
 
@@ -42,7 +42,7 @@ open class Callbacks(dr: DataRepository) {
 
         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
             val responseText = response.body()?.string()
-            responseText?.let { dr.model.reduce(Action.RepItemLoadAction(parser.repItem(it))) }
+            responseText?.let { dr.model.reduce(Action.NWRepItemLoadAction(parser.repItem(it))) }
         }
     }
 }

@@ -23,24 +23,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        init()
-        updateButtonMode()
-
-        pref = getSharedPreferences(APP_USER, MODE_PRIVATE)
-        if ((pref.contains(USER_LOGIN)) && (pref.contains(USER_PASSWORD))) {
-            email = pref.getString(USER_LOGIN, "") ?: ""
-            pass = pref.getString(USER_PASSWORD, "") ?: ""
-            user = User(email, pass)
-
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra(USER_LOGIN, user.email)
-            intent.putExtra(USER_PASSWORD, user.password)
-            startActivity(intent)
-            finish()
-        }
-    }
-
-    private fun init() {
         al_btn_sign_in.setOnClickListener {
             email = al_et_email.text.toString()
             pass = al_et_password.text.toString()
@@ -74,15 +56,27 @@ class LoginActivity : AppCompatActivity() {
                 updateButtonMode()
             }
         })
+        updateButtonMode()
+
+        pref = getSharedPreferences(APP_USER, MODE_PRIVATE)
+        if ((pref.contains(USER_LOGIN)) && (pref.contains(USER_PASSWORD))) {
+            email = pref.getString(USER_LOGIN, "") ?: ""
+            pass = pref.getString(USER_PASSWORD, "") ?: ""
+            user = User(email, pass)
+
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra(USER_LOGIN, user.email)
+            intent.putExtra(USER_PASSWORD, user.password)
+            startActivity(intent)
+            finish()
+        }
     }
 
-    private fun emailError(isShowed: Boolean, message: String = "email uncorrect") {
+    private fun emailError(isShowed: Boolean, message: String = "email uncorrect") =
         if (isShowed) al_til_email.setError(message) else al_til_email.setError("")
-    }
 
-    private fun passwordError(isShowed: Boolean, message: String = "too easy") {
+    private fun passwordError(isShowed: Boolean, message: String = "too easy") =
         if (isShowed) al_til_password.setError(message) else al_til_password.setError("")
-    }
 
     private fun checkEmail(email: String) = email.contains('@') && (email.length in 6..70)
     private fun checkPassword(password: String) = password.length in PASSWORD_SIZE_RANGE

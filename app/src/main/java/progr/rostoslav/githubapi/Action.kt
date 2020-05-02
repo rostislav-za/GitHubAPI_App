@@ -11,8 +11,7 @@ sealed class Action {
     class UIRefreshedListAction : Action()
 
     //    NETWORK
-    class RepItemLoadAction(val rep: Rep) : Action()
-    class RepInfoLoadedAction(val rep_info: Rep) : Action()
-    class RepsLoadedAction(val new_reps: ArrayList<Rep>) : Action()
-    class CommitsLoadedAction(val new_commits: ArrayList<Commit>) : Action()
+    class NWRepItemLoadAction(val rep: Rep) : Action()
+    class NWRepsLoadedAction(val new_reps: ArrayList<Rep>) : Action()
+    class NWCommitsLoadedAction(val new_commits: ArrayList<Commit>) : Action()
 }
