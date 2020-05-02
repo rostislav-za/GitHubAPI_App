@@ -1,9 +1,6 @@
 package progr.rostoslav.githubapi.ui.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -12,10 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_rep_list.*
 import kotlinx.android.synthetic.main.include_recycler.*
 import kotlinx.android.synthetic.main.item_rep.*
-import progr.rostoslav.githubapi.Action
-import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.R
+import progr.rostoslav.githubapi.domain.Action
 import progr.rostoslav.githubapi.entities.Rep
+import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.ui.FollowerView
 import progr.rostoslav.githubapi.ui.activityes.ActionProvider
 import progr.rostoslav.githubapi.ui.recycler.adapters.RepAdapter

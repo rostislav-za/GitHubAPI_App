@@ -1,9 +1,7 @@
 package progr.rostoslav.githubapi.domain
 
-
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import progr.rostoslav.githubapi.Action
 import progr.rostoslav.githubapi.data.DataRepository
 import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.entities.User

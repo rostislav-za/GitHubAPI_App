@@ -1,10 +1,10 @@
 package progr.rostoslav.githubapi.data.network
 
 import okhttp3.ResponseBody
-import progr.rostoslav.githubapi.Action
 import progr.rostoslav.githubapi.data.DataRepository
-import retrofit2.Callback
+import progr.rostoslav.githubapi.domain.Action
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 open class Callbacks(dr: DataRepository) {

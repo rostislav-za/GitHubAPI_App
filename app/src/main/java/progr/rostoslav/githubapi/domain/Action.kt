@@ -1,4 +1,4 @@
-package progr.rostoslav.githubapi
+package progr.rostoslav.githubapi.domain
 
 import progr.rostoslav.githubapi.entities.Commit
 import progr.rostoslav.githubapi.entities.Rep

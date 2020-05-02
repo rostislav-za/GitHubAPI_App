@@ -11,11 +11,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.activity_main.*
-import progr.rostoslav.githubapi.Action
 import progr.rostoslav.githubapi.R
 import progr.rostoslav.githubapi.data.local.APP_USER
 import progr.rostoslav.githubapi.data.local.USER_LOGIN
 import progr.rostoslav.githubapi.data.local.USER_PASSWORD
+import progr.rostoslav.githubapi.domain.Action
 import progr.rostoslav.githubapi.domain.AppModel
 import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.ui.FollowerView
@@ -87,6 +87,6 @@ class MainActivity : AppCompatActivity(), ActionProvider, FollowerView {
     }
 
     override fun updateView() {
-        getSupportActionBar()?.title = DataManager.getUsername()
+        supportActionBar?.title = DataManager.getUsername()
     }
 }
