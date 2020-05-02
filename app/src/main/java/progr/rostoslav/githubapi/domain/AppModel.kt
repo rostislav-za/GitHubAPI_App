@@ -53,7 +53,7 @@ class AppModel() {
                 val r = list.findLast { (it.author + "/" + it.title == a.new_commits[0].parent) }
                 list[list.lastIndexOf(r)].commits_count = a.new_commits.size
                 list[list.lastIndexOf(r)].commits = a.new_commits
-                DataManager.udateReps(list)
+                DataManager.udateReps(list, false )
             }
             is Action.NWRepItemLoadAction -> {
                 a.rep.user_key = user.key + ""
@@ -61,7 +61,7 @@ class AppModel() {
                 val r = list.findLast { (it.title == a.rep.title) && (it.author == a.rep.author) }
                if(r!=null)list[list.lastIndexOf(r)] = a.rep.copy(commits_count = r.commits_count,commits = r.commits)
 
-                DataManager.udateReps(list)
+                DataManager.udateReps(list, false)
             }
         }
     }

@@ -11,7 +11,7 @@ import progr.rostoslav.githubapi.entities.TaskInfo
 import progr.rostoslav.githubapi.ui.FollowerView
 import progr.rostoslav.githubapi.ui.recycler.adapters.TaskAdapter
 
-class InfoFragment : Fragment() , FollowerView {
+class InfoFragment : Fragment(R.layout.fragment_info) , FollowerView {
     val adapter = TaskAdapter()
     val list = listOf<TaskInfo>(
         TaskInfo(
@@ -113,19 +113,13 @@ class InfoFragment : Fragment() , FollowerView {
         toUnfollowView(this)
         super.onStop()
     }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_info, container, false)
-
      fun init() {
         rv.layoutManager = LinearLayoutManager(activity)
         rv.adapter = adapter
     }
 
-    fun setContent() {
-        adapter.setList(list)
-    }
+    fun setContent() =adapter.setList(list)
+
 
     override fun updateView() =setContent()
 

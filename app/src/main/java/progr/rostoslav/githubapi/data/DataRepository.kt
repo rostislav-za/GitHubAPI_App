@@ -22,7 +22,7 @@ class DataRepository(val model: AppModel) {
 
     fun getReps() = net.getGlobalRepsFromServer()
 
-    fun getRepItems(reps: List<Rep>) = runBlocking { launch {(net.getGlobalRepsItemsFromServer(reps))}}
+    fun getRepItems(reps: List<Rep>) =net.getGlobalRepsItemsFromServer(reps)
 
     fun getUserReps(author: String) = net.getRepsFromServer(author)
 

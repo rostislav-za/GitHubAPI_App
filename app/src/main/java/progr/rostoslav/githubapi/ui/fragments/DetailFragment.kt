@@ -18,7 +18,7 @@ import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.ui.FollowerView
 import progr.rostoslav.githubapi.ui.recycler.adapters.CommitAdapter
 
-class DetailFragment : Fragment(), FollowerView {
+class DetailFragment : Fragment(R.layout.fragment_detail), FollowerView {
     val commitAdapter = CommitAdapter()
     var list = listOf<Commit>()
     var repos_Info: Rep = DataManager.getRepInfo()
@@ -30,16 +30,11 @@ class DetailFragment : Fragment(), FollowerView {
         super.onStart()
     }
 
-
     override fun onStop() {
         toUnfollowView(this)
         super.onStop()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_detail, container, false)
 
     fun init() {
         sharedElementEnterTransition =
@@ -68,7 +63,6 @@ class DetailFragment : Fragment(), FollowerView {
         }
         list = repos_Info.commits
         commitAdapter.setList(list)
-
     }
 
     override fun updateView() = setContent()

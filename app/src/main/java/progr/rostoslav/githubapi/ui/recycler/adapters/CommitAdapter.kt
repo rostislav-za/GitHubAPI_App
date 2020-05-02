@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_commit.*
-import kotlinx.android.synthetic.main.item_rep.*
 import progr.rostoslav.githubapi.R
 
 import progr.rostoslav.githubapi.entities.Commit

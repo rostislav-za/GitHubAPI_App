@@ -17,7 +17,6 @@ import progr.rostoslav.githubapi.data.local.APP_USER
 import progr.rostoslav.githubapi.data.local.USER_LOGIN
 import progr.rostoslav.githubapi.data.local.USER_PASSWORD
 import progr.rostoslav.githubapi.domain.AppModel
-import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.ui.FollowerView
 
@@ -30,11 +29,22 @@ class MainActivity : AppCompatActivity(), ActionProvider, FollowerView {
         setContentView(R.layout.activity_main)
         setContent()
     }
-
-    override fun startLoginActivity() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_activity_toolbarr_menu, menu)
+        return true
     }
+    override fun onNewIntent(intent: Intent?) {
+        setContent()
+        super.onNewIntent(intent)
+    }
+    override fun onStop() {
+        super.onStop()
+        app_model.onDestroy()
+    }
+
+    override fun reduce(a: Action) = app_model.reduce(a)
+
+    override fun startLoginActivity() =startActivity(Intent(this, LoginActivity::class.java))
 
     fun clearSharedPref() {
         val pref = getSharedPreferences(APP_USER, MODE_PRIVATE)
@@ -43,23 +53,7 @@ class MainActivity : AppCompatActivity(), ActionProvider, FollowerView {
         editor.apply()
     }
 
-    override fun refreshData() = app_model.reduce(Action.UIRefreshedListAction())
-
-    override fun repIsSavedChanged(rep: Rep) = app_model.reduce(Action.UIRepSavedChangedAction(rep))
-
-    override fun repItemClicked(rep: Rep) = app_model.reduce(Action.UIRepClickedAction(rep))
-
-    override fun onNewIntent(intent: Intent?) {
-        setContent()
-        super.onNewIntent(intent)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        saveContet()
-    }
-
-    open fun initRealm() {
+    fun initRealm() {
         Realm.init(this)
         val config = RealmConfiguration.Builder()
             .deleteRealmIfMigrationNeeded()
@@ -67,14 +61,12 @@ class MainActivity : AppCompatActivity(), ActionProvider, FollowerView {
         Realm.setDefaultConfiguration(config)
     }
 
-    open fun initNavigation(nav_fragment: Int, nav_view: Int) {
+    fun initNavigation(nav_fragment: Int, nav_view: Int) {
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(nav_fragment) as NavHostFragment? ?: return
         navController = host.navController
         val bottomBar = findViewById<BottomNavigationView>(nav_view)
-
         bottomBar?.setupWithNavController(navController)
-
     }
 
     fun setContent() {
@@ -97,11 +89,4 @@ class MainActivity : AppCompatActivity(), ActionProvider, FollowerView {
     override fun updateView() {
         getSupportActionBar()?.title = DataManager.getUsername()
     }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_activity_toolbarr_menu, menu)
-        return true
-    }
-
-    fun saveContet() = app_model.onDestroy()
 }
