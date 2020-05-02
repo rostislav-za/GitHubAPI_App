@@ -1,8 +1,9 @@
 package progr.rostoslav.githubapi.data.network
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import progr.rostoslav.githubapi.data.DataRepository
 import progr.rostoslav.githubapi.entities.Rep
 import progr.rostoslav.githubapi.entities.User
@@ -24,16 +25,16 @@ class Net(dr: DataRepository, user: User) {
 
     fun getGlobalRepsFromServer() = api?.getGlobalReps()?.enqueue(cb.globalReps)
 
-   fun getGlobalRepsItemsFromServer(reps: List<Rep>)=  runBlocking { launch {
+    fun getGlobalRepsItemsFromServer(reps: List<Rep>) = GlobalScope.launch(Dispatchers.Main) {
         for (i in reps) {
             delay(100)
             api?.getRep(i.author, i.title)?.enqueue(cb.repItem)
-         //   delay(100)
-         //   api?.getCommits(i.author, i.title)?.enqueue(cb.commits)
+            delay(100)
+            api?.getCommits(i.author, i.title)?.enqueue(cb.commits)
         }
-        delay(300)
+        delay(2000)
         DataManager.updateFollowersViews()
-    }}
+    }
 
     fun getRepsFromServer(author: String = "octocat") =
         api?.getUserReps(author)?.enqueue(cb.userReps)

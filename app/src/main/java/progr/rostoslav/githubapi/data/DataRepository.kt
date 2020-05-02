@@ -1,8 +1,6 @@
 package progr.rostoslav.githubapi.data
 
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import progr.rostoslav.githubapi.data.local.*
+import progr.rostoslav.githubapi.data.local.Local
 import progr.rostoslav.githubapi.data.network.Net
 import progr.rostoslav.githubapi.domain.AppModel
 import progr.rostoslav.githubapi.entities.Rep

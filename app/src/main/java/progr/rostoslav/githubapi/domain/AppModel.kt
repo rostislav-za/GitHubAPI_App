@@ -10,7 +10,7 @@ import progr.rostoslav.githubapi.entities.User
 import progr.rostoslav.githubapi.ui.DataManager
 import progr.rostoslav.githubapi.ui.activityes.ActionProvider
 
-class AppModel() {
+class AppModel {
     lateinit var dr: DataRepository
     var user = User("", "")
     lateinit var activity: AppCompatActivity
@@ -24,17 +24,17 @@ class AppModel() {
 
         DataManager.udateReps(dr.getLoadedReps())
         // dr.getUserReps("octokit")
-        dr.getReps()
+        reduce(Action.UIRefreshedListAction())
         dr.getCommits("rostislav-za", "GitHubAPI")
     }
 
     fun onDestroy() = saveData()
 
-  fun reduce(a: Action) {
+    fun reduce(a: Action) {
         when (a) {
             is Action.UIRepClickedAction -> {
                 dr.getCommits(a.rep.author, a.rep.title)
-              val ind = DataManager.getReps().indexOf(a.rep)
+                val ind = DataManager.getReps().indexOf(a.rep)
                 DataManager.setRepInfo(ind)
             }
             is Action.UIRepSavedChangedAction -> {
@@ -42,8 +42,9 @@ class AppModel() {
                 DataManager.updateRep(a.rep, copy)
                 dr.saveReps(DataManager.getSavedReps())
             }
-            is Action.UIRefreshedListAction -> dr.getReps()
-
+            is Action.UIRefreshedListAction -> {
+                dr.getReps()
+            }
             is Action.NWRepsLoadedAction -> {
                 DataManager.udateReps(mergeListFromNet(DataManager.getReps(), a.new_reps))
                 dr.getRepItems(DataManager.getReps().subList(0, 5))
@@ -53,13 +54,14 @@ class AppModel() {
                 val r = list.findLast { (it.author + "/" + it.title == a.new_commits[0].parent) }
                 list[list.lastIndexOf(r)].commits_count = a.new_commits.size
                 list[list.lastIndexOf(r)].commits = a.new_commits
-                DataManager.udateReps(list, false )
+                DataManager.udateReps(list, false)
             }
             is Action.NWRepItemLoadAction -> {
                 a.rep.user_key = user.key + ""
                 val list = DataManager.getReps()
                 val r = list.findLast { (it.title == a.rep.title) && (it.author == a.rep.author) }
-               if(r!=null)list[list.lastIndexOf(r)] = a.rep.copy(commits_count = r.commits_count,commits = r.commits)
+                if (r != null) list[list.lastIndexOf(r)] =
+                    a.rep.copy(commits_count = r.commits_count, commits = r.commits)
 
                 DataManager.udateReps(list, false)
             }
